@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const whatsappButtons = document.querySelectorAll('.btn-whatsapp');
     
     // WhatsApp Configuration - EDIT THESE VALUES
-    const WHATSAPP_NUMBER = '1234567890'; // Replace with your WhatsApp number (include country code, no + or spaces)
+    const WHATSAPP_NUMBER = '254115594826'; // M Solutions WhatsApp Business Number
     const BUSINESS_NAME = 'M Solutions';
     
     whatsappButtons.forEach(button => {

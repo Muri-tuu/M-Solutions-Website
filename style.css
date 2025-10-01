@@ -3,10 +3,10 @@
    Customize these values to match your brand
    ================================ */
 :root {
-    --primary-color: #2563eb;      /* Main brand color (blue) */
-    --secondary-color: #10b981;    /* Secondary color (green) */
-    --accent-color: #f59e0b;       /* Accent color (orange) */
-    --dark-color: #1f2937;         /* Dark text/backgrounds */
+    --primary-color: #FF6B35;      /* Main brand color (M Solutions Orange) */
+    --secondary-color: #39FF14;    /* Secondary color (Neon Green) */
+    --accent-color: #FF8C42;       /* Accent color (Light Orange) */
+    --dark-color: #000000;         /* Dark text/backgrounds (Black) */
     --light-color: #f9fafb;        /* Light backgrounds */
     --white-color: #ffffff;        /* White */
     --gray-color: #6b7280;         /* Gray text */
