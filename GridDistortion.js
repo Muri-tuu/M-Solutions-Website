@@ -40,6 +40,24 @@
     var plane = new THREE.Mesh(geometry, material);
     scene.add(plane);
 
+    function createGridTexture(){
+      var size = 1024; var gap = 28;
+      var canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      var ctx = canvas.getContext('2d');
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      ctx.fillStyle = 'rgba(0,0,0,0)';
+      ctx.fillRect(0,0,size,size);
+      ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)';
+      ctx.lineWidth = 1;
+      for (var x=0; x<=size; x+=gap){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,size); ctx.stroke(); }
+      for (var y=0; y<=size; y+=gap){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(size,y); ctx.stroke(); }
+      var tex = new THREE.CanvasTexture(canvas);
+      tex.minFilter = THREE.LinearFilter; tex.magFilter = THREE.LinearFilter;
+      tex.wrapS = THREE.ClampToEdgeWrapping; tex.wrapT = THREE.ClampToEdgeWrapping;
+      return tex;
+    }
+
     var textureLoader = new THREE.TextureLoader();
     if(imageSrc){
       textureLoader.load(imageSrc, function(texture){
@@ -50,6 +68,9 @@
         uniforms.uTexture.value = texture;
         handleResize();
       });
+    } else {
+      uniforms.uTexture.value = createGridTexture();
+      handleResize();
     }
 
     function handleResize(){
