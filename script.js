@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
        ================================ */
     const servicesBg = document.querySelector('.services .services-bg');
     if (servicesBg && window.initGridDistortion) {
-        const imgSrc = servicesBg.getAttribute('data-image');
-        window.initGridDistortion(servicesBg, { imageSrc: imgSrc, grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 });
+        // No background image per request; use a neutral 1x1 transparent texture
+        window.initGridDistortion(servicesBg, { imageSrc: '', grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 });
     }
     
     /* ================================
