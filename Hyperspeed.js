@@ -14,22 +14,20 @@
     function draw(){
       t += 0.008;
       var w=canvas.width, h=canvas.height;
-      var g=ctx.createLinearGradient(0,0,w,h);
-      var c1 = 'hsl(' + ((t*120)%360) + ',70%,20%)';
-      var c2 = 'hsl(' + ((t*120+120)%360) + ',70%,10%)';
-      g.addColorStop(0, c1);
-      g.addColorStop(1, c2);
-      ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-      // light streaks
-      for(var i=0;i<40;i++){
-        var x = (Math.sin(t*3 + i)*0.5+0.5)*w;
-        var len = (Math.sin(t*4 + i)*0.5+0.5)*h*0.6 + h*0.2;
-        var grd = ctx.createLinearGradient(x,0,x,h);
+      ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
+      // hyperspeed light streaks, brighter and more crowded
+      for(var i=0;i<90;i++){
+        var x = (Math.sin(t*3 + i*0.77)*0.5+0.5)*w;
+        var y = 0;
+        var len = (Math.sin(t*5 + i*1.7)*0.5+0.5)*h*0.7 + h*0.2;
+        var alphaMid = 0.2 + 0.2*Math.sin(t*2 + i);
+        var grd = ctx.createLinearGradient(x,y,x,h);
         grd.addColorStop(0,'rgba(255,255,255,0)');
-        grd.addColorStop(0.5,'rgba(255,255,255,0.12)');
+        grd.addColorStop(0.45,'rgba(255,255,255,'+alphaMid.toFixed(3)+')');
         grd.addColorStop(1,'rgba(255,255,255,0)');
         ctx.fillStyle = grd;
-        ctx.fillRect(x-1, 0, 2, len);
+        var wline = 1 + (Math.sin(i*2.1)+1)*0.7;
+        ctx.fillRect(x-wline/2, y, wline, len);
       }
       rafId = requestAnimationFrame(draw);
     }
