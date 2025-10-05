@@ -378,7 +378,7 @@ ul {
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: 0.15;
+    opacity: 0.25;
     pointer-events: none;
 }
 
@@ -506,6 +506,7 @@ ul {
 
 .product-content {
     padding: var(--spacing-sm);
+    color: var(--dark-color);
 }
 
 .product-name {
@@ -559,6 +560,22 @@ ul {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+/* Ensure dark theme surfaces maintain contrast */
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .service-card {
+    background-color: #0f131a; /* slightly lighter than page bg */
+}
+
+html[data-theme="dark"] .product-name,
+html[data-theme="dark"] .service-title {
+    color: #f3f4f6;
+}
+
+html[data-theme="dark"] .product-description,
+html[data-theme="dark"] .service-description {
+    color: #cbd5e1;
 }
 
 /* ================================
