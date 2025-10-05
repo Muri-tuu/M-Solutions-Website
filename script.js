@@ -93,6 +93,41 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
         });
     });
+
+    /* ================================
+       CART & WISHLIST (LOCALSTORAGE)
+       Minimal counters to support UI badges
+       ================================ */
+    const CART_KEY = 'msolutions_cart_items';
+    const WISHLIST_KEY = 'msolutions_wishlist_items';
+    const cartToggle = document.querySelector('.cart-toggle');
+    const wishlistToggle = document.querySelector('.wishlist-toggle');
+    const cartCountEl = document.getElementById('cart-count');
+    const wishlistCountEl = document.getElementById('wishlist-count');
+    const readStore = (key) => {
+        try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; }
+    };
+    const writeStore = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+    const updateBadges = () => {
+        const cartItems = readStore(CART_KEY);
+        const wishlistItems = readStore(WISHLIST_KEY);
+        if (cartCountEl) cartCountEl.textContent = String(cartItems.length);
+        if (wishlistCountEl) wishlistCountEl.textContent = String(wishlistItems.length);
+    };
+    updateBadges();
+    if (cartToggle) cartToggle.addEventListener('click', () => {
+        const items = readStore(CART_KEY);
+        // Placeholder interaction: add a demo item to show count increment
+        items.push({ id: Date.now(), name: 'Sample Item' });
+        writeStore(CART_KEY, items);
+        updateBadges();
+    });
+    if (wishlistToggle) wishlistToggle.addEventListener('click', () => {
+        const items = readStore(WISHLIST_KEY);
+        items.push({ id: Date.now(), name: 'Wishlist Item' });
+        writeStore(WISHLIST_KEY, items);
+        updateBadges();
+    });
     
     /* ================================
        SMOOTH SCROLL FOR ANCHOR LINKS

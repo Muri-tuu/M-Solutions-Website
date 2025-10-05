@@ -152,6 +152,37 @@ ul {
     gap: 0.75rem;
 }
 
+.icon-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border: 1px solid var(--card-border-color);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.icon-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 11px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
 .theme-toggle {
     width: 40px;
     height: 40px;
@@ -393,6 +424,17 @@ ul {
     align-items: center;
     justify-content: center;
 }
+
+.product-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.product-card:hover .product-image::after { opacity: 1; }
 
 .product-image img {
     width: 100%;
