@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF6B35">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
     <!-- SEO Meta Tags -->
     <title>M Solutions - Campus Essentials & Tech Services</title>
@@ -28,10 +30,10 @@
     <meta property="twitter:description" content="Premium campus essentials and professional tech services for students and professionals.">
     <meta property="twitter:image" content="./assets/images/og-image.jpg">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/apple-touch-icon.png">
+    <!-- Favicon (local fallbacks already included above root-level) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
@@ -46,7 +48,7 @@
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <img src="./assets/images/Logo (2).png" alt="M Solutions Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <img src="./assets/images/Logo (2).png" alt="M Solutions Logo" class="logo-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <span class="logo-text">Solutions</span>
                 </div>
                 <ul class="nav-menu">
@@ -149,7 +151,7 @@
                 <!-- Product Card 1 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./assets/images/product-1.jpg" alt="Engineering Set">
+                        <img src="./assets/images/product-1.jpg" alt="Engineering Set" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Engineering Set</h3>
@@ -164,7 +166,7 @@
                 <!-- Product Card 2 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./assets/images/product-2.jpg" alt="FX-82MS Scientific Calculator">
+                        <img src="./assets/images/product-2.jpg" alt="FX-82MS Scientific Calculator" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">FX-82MS Scientific Calculator</h3>
@@ -179,7 +181,7 @@
                 <!-- Product Card 3 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./assets/images/product-3.jpg" alt="FX-991ES Plus Scientific Calculator">
+                        <img src="./assets/images/product-3.jpg" alt="FX-991ES Plus Scientific Calculator" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">FX-991ES Plus Scientific Calculator</h3>
@@ -194,7 +196,7 @@
                 <!-- Product Card 4 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./assets/images/product-4.jpg" alt="Oraimo Products">
+                        <img src="./assets/images/product-4.jpg" alt="Oraimo Products" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Oraimo × M Solutions</h3>
@@ -209,7 +211,7 @@
                 <!-- Product Card 5 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./assets/images/product-5.jpg" alt="Overalls">
+                        <img src="./assets/images/product-5.jpg" alt="Overalls" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Overalls</h3>
@@ -224,7 +226,7 @@
                 <!-- Product Card 6 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./assets/images/product-6.jpg" alt="View Full Catalog">
+                        <img src="./assets/images/product-6.jpg" alt="View Full Catalog" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Browse Full Catalog</h3>
@@ -251,7 +253,7 @@
                 <div class="footer-section">
                     <h3 class="footer-title">Contact Us</h3>
                     <ul class="footer-list">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@msolutions.com">msolutions.ac.ke@gmail.com</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:msolutions.ac.ke@gmail.com">msolutions.ac.ke@gmail.com</a></li>
                         <li><i class="fas fa-phone"></i> <a href="tel:+254115594826">+254 115 594 826</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Kennedy Muritu | M Solutions</li>
                     </ul>
@@ -293,6 +295,6 @@
     </a>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
