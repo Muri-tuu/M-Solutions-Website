@@ -51,6 +51,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /* ================================
+       SERVICES SPOTLIGHT EFFECT
+       ================================ */
+    document.querySelectorAll('.card-spotlight').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', x + 'px');
+            card.style.setProperty('--mouse-y', y + 'px');
+        });
+    });
+
+    /* ================================
        MOBILE NAVIGATION TOGGLE
        ================================ */
     const hamburger = document.querySelector('.hamburger');
@@ -183,6 +196,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    /* ================================
+       SERVICES GRID DISTORTION BACKGROUND (FALLBACK PLACEHOLDER)
+       This is a lightweight placeholder that sets the background image.
+       A full THREE.js implementation would be added in a React/Canvas setup.
+       ================================ */
+    const servicesBg = document.querySelector('.services .services-bg');
+    if (servicesBg) {
+        const imgSrc = servicesBg.getAttribute('data-image');
+        if (imgSrc) {
+            servicesBg.style.backgroundImage = `url('${imgSrc}')`;
+            servicesBg.style.backgroundSize = 'cover';
+            servicesBg.style.backgroundPosition = 'center';
+            servicesBg.style.filter = 'contrast(1.1) saturate(0.9)';
+        }
+    }
     
     /* ================================
        HEADER SCROLL EFFECT (OPTIONAL)
