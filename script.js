@@ -130,11 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (header) {
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
-            }
+            const scrolled = window.scrollY > 50;
+            header.style.boxShadow = scrolled ? '0 12px 30px rgba(0,0,0,0.08)' : '0 10px 30px rgba(0,0,0,0.05)';
         });
     }
     
