@@ -239,6 +239,16 @@ document.addEventListener('DOMContentLoaded', function() {
             yGap: 36
         });
     }
+
+    /* ================================
+       INIT INTERACTIVE CARDS
+       ================================ */
+    if (window.autoInitTiltedCards) {
+        window.autoInitTiltedCards();
+    }
+    if (window.mountAllProfileCards) {
+        window.mountAllProfileCards();
+    }
     
     /* ================================
        PLACEHOLDER FOR FUTURE FEATURES
