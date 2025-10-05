@@ -278,6 +278,7 @@ ul {
     margin-top: 60px;
     transition: background 0.3s ease, color 0.3s ease;
     position: relative;
+    min-height: calc(100vh - 60px); /* ensure hero fills viewport below header */
 }
 
 /* Hero brand gradient that fades into the page to remove boundaries */
@@ -392,8 +393,8 @@ html[data-theme="dark"] .hero::before {
     background-color: transparent;
     position: relative;
     overflow: hidden;
-    margin-top: -80px; /* pull up to overlap fade for seamless transition */
-    padding-top: calc(var(--spacing-xl) + 80px);
+    margin-top: 0; /* no overlap with hero */
+    padding-top: var(--spacing-xl);
 }
 
 .services-grid {
