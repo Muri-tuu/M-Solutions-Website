@@ -115,7 +115,7 @@ ul {
 .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(---dark-color);
+    color: var(--dark-color);
 }
 
 .nav-menu {
