@@ -4,6 +4,42 @@
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    /* ================================
+       THEME: PERSISTED DARK/LIGHT TOGGLE
+       ================================ */
+    const root = document.documentElement;
+    const themeToggleButton = document.querySelector('.theme-toggle');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+    const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+    if (initialTheme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+    }
+    const setToggleIcon = () => {
+        if (!themeToggleButton) return;
+        const icon = themeToggleButton.querySelector('i');
+        if (!icon) return;
+        icon.classList.remove('fa-moon', 'fa-sun');
+        if (root.getAttribute('data-theme') === 'dark') {
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.add('fa-moon');
+        }
+    };
+    setToggleIcon();
+    if (themeToggleButton) {
+        themeToggleButton.addEventListener('click', () => {
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                root.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                root.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            setToggleIcon();
+        });
+    }
     
     /* ================================
        MOBILE NAVIGATION TOGGLE
