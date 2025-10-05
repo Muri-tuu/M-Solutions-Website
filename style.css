@@ -87,6 +87,16 @@ a {
     transition: var(--transition);
 }
 
+/* Focus visibility for accessibility */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.icon-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
 ul {
     list-style: none;
 }
@@ -95,7 +105,7 @@ ul {
    CONTAINER & LAYOUT
    ================================ */
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--spacing-sm);
 }
@@ -169,6 +179,8 @@ ul {
 }
 
 .icon-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.icon-btn.small { width: 34px; height: 34px; }
 
 .badge {
     position: absolute;
@@ -295,6 +307,8 @@ ul {
     transition: var(--transition);
     border: none;
     font-size: 1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
@@ -482,6 +496,22 @@ ul {
     opacity: 1;
 }
 
+/* Ripple effect element for buttons */
+.ripple {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.45);
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 550ms ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to { transform: translate(-50%, -50%) scale(22); opacity: 0; }
+}
+
 .product-price {
     font-size: 1.5rem;
     font-weight: 700;
@@ -654,6 +684,16 @@ ul {
     /* Footer */
     .footer-content {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 

@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setToggleIcon();
     if (themeToggleButton) {
         themeToggleButton.addEventListener('click', () => {
+            // ripple
+            const rect = themeToggleButton.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.left = rect.width / 2 + 'px';
+            ripple.style.top = rect.height / 2 + 'px';
+            themeToggleButton.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+
             const isDark = root.getAttribute('data-theme') === 'dark';
             if (isDark) {
                 root.removeAttribute('data-theme');
@@ -116,6 +125,15 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     updateBadges();
     if (cartToggle) cartToggle.addEventListener('click', () => {
+        // ripple
+        const rect = cartToggle.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = rect.width / 2 + 'px';
+        ripple.style.top = rect.height / 2 + 'px';
+        cartToggle.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+
         const items = readStore(CART_KEY);
         // Placeholder interaction: add a demo item to show count increment
         items.push({ id: Date.now(), name: 'Sample Item' });
@@ -123,6 +141,15 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBadges();
     });
     if (wishlistToggle) wishlistToggle.addEventListener('click', () => {
+        // ripple
+        const rect = wishlistToggle.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = rect.width / 2 + 'px';
+        ripple.style.top = rect.height / 2 + 'px';
+        wishlistToggle.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+
         const items = readStore(WISHLIST_KEY);
         items.push({ id: Date.now(), name: 'Wishlist Item' });
         writeStore(WISHLIST_KEY, items);
