@@ -198,19 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     /* ================================
-       SERVICES GRID DISTORTION BACKGROUND (FALLBACK PLACEHOLDER)
-       This is a lightweight placeholder that sets the background image.
-       A full THREE.js implementation would be added in a React/Canvas setup.
+       SERVICES GRID DISTORTION BACKGROUND (THREE.js)
        ================================ */
     const servicesBg = document.querySelector('.services .services-bg');
-    if (servicesBg) {
+    if (servicesBg && window.initGridDistortion) {
         const imgSrc = servicesBg.getAttribute('data-image');
-        if (imgSrc) {
-            servicesBg.style.backgroundImage = `url('${imgSrc}')`;
-            servicesBg.style.backgroundSize = 'cover';
-            servicesBg.style.backgroundPosition = 'center';
-            servicesBg.style.filter = 'contrast(1.1) saturate(0.9)';
-        }
+        window.initGridDistortion(servicesBg, { imageSrc: imgSrc, grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 });
     }
     
     /* ================================
@@ -223,6 +216,27 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', function() {
             const scrolled = window.scrollY > 50;
             header.style.boxShadow = scrolled ? '0 12px 30px rgba(0,0,0,0.08)' : '0 10px 30px rgba(0,0,0,0.05)';
+        });
+    }
+
+    /* ================================
+       HERO WAVES BACKGROUND
+       ================================ */
+    const heroWaves = document.getElementById('hero-waves');
+    if (heroWaves && window.initWaves) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        window.initWaves(heroWaves, {
+            lineColor: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.9)',
+            backgroundColor: 'rgba(255, 255, 255, 0.10)',
+            waveSpeedX: 0.02,
+            waveSpeedY: 0.01,
+            waveAmpX: 40,
+            waveAmpY: 20,
+            friction: 0.9,
+            tension: 0.01,
+            maxCursorMove: 120,
+            xGap: 12,
+            yGap: 36
         });
     }
     

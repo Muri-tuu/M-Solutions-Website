@@ -40,6 +40,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./SpotlightCard.css">
+    <link rel="stylesheet" href="./GridDistortion.css">
+    <link rel="stylesheet" href="./Waves.css">
     
     <!-- Font Awesome for Icons (CDN) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -83,7 +86,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" style="position:relative;">
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Your Campus Essentials & Tech Services Hub</h1>
@@ -91,6 +94,7 @@
                 <a href="#contact" class="btn btn-primary">Get Started</a>
             </div>
         </div>
+        <div id="hero-waves" class="waves" aria-hidden="true"></div>
     </section>
 
     <!-- Services Section -->
@@ -312,6 +316,9 @@
     </a>
 
     <!-- JavaScript -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
+    <script src="./Waves.js" defer></script>
+    <script src="./GridDistortion.js" defer></script>
     <script src="script.js" defer></script>
 </body>
 </html>
