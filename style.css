@@ -295,6 +295,14 @@ ul {
             mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
 }
 
+/* Dark theme hero background: dim gradient for contrast */
+html[data-theme="dark"] .hero::before {
+    background:
+      radial-gradient(1200px 500px at 10% 10%, rgba(0,0,0,0.45), rgba(0,0,0,0) 60%),
+      radial-gradient(1000px 400px at 90% 20%, rgba(0,0,0,0.35), rgba(0,0,0,0) 60%),
+      linear-gradient(135deg, #0b0c0f 0%, #111827 100%);
+}
+
 .hero > .container, .hero-content {
     position: relative;
     z-index: 1;
@@ -517,12 +525,12 @@ ul {
 .product-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* do not crop images */
     transition: var(--transition);
 }
 
 .product-card:hover .product-image img {
-    transform: scale(1.05);
+    transform: none; /* avoid cropping when hovering */
 }
 
 .product-content {
