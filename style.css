@@ -670,7 +670,7 @@ html[data-theme="dark"] .service-description {
     right: 30px;
     width: 60px;
     height: 60px;
-    background-color: #25d366;
+    background-color: rgba(37, 211, 102, 0.75);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -680,11 +680,20 @@ html[data-theme="dark"] .service-description {
     box-shadow: var(--shadow-lg);
     z-index: 999;
     transition: var(--transition);
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    overflow: visible;
 }
 
 .whatsapp-float:hover {
-    background-color: #128c7e;
+    background-color: rgba(18, 140, 126, 0.85);
     transform: scale(1.1);
+}
+
+html[data-theme="dark"] .whatsapp-float {
+    background-color: rgba(37, 211, 102, 0.6);
+    border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* ================================

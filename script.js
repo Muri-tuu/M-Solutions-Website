@@ -258,6 +258,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.mountAllProfileCards) {
         window.mountAllProfileCards();
     }
+
+    // ClickSpark on WhatsApp float (with brand color)
+    const waFloat = document.querySelector('.whatsapp-float');
+    if (waFloat && window.initClickSpark) {
+        window.initClickSpark(waFloat, { sparkColor: '#FF6B35', sparkSize: 10, sparkRadius: 18, sparkCount: 10, duration: 420, extraScale: 1.1 });
+    }
     
     /* ================================
        PLACEHOLDER FOR FUTURE FEATURES
