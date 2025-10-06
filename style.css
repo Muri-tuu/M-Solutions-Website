@@ -280,6 +280,8 @@ ul {
     position: relative;
     min-height: calc(100vh - 60px); /* ensure hero fills viewport below header */
 }
+.hero #hero-letterglitch { position:absolute; inset:0; z-index:0; opacity:0.18; pointer-events:none; }
+.hero #hero-products-bg { position:absolute; inset:0; z-index:0; opacity:0.18; pointer-events:none; }
 
 /* Hero brand gradient that fades into the page to remove boundaries */
 /* Remove previous hero overlay backgrounds */

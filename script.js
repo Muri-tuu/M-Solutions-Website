@@ -229,9 +229,16 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ================================
        HERO WAVES BACKGROUND
        ================================ */
-    const heroBallpit = document.getElementById('ballpit');
-    if (heroBallpit && window.initBallpit) {
-        window.initBallpit(heroBallpit, { count: 160, gravity: 0.7, friction: 0.92, wallBounce: 0.96, followCursor: true });
+    // Hero composite: services LetterGlitch + products GridDistortion
+    const heroLetter = document.getElementById('hero-letterglitch');
+    if (heroLetter && window.initLetterGlitch) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const glitchColors = isDark ? ['#1f2937','#4b5563','#9ca3af'] : ['#e5e7eb','#93c5fd','#34d399'];
+        window.initLetterGlitch(heroLetter, { glitchColors, glitchSpeed: 70, centerVignette: false, outerVignette: false, smooth: true });
+    }
+    const heroProductsBg = document.getElementById('hero-products-bg');
+    if (heroProductsBg && window.initGridDistortion) {
+        window.initGridDistortion(heroProductsBg, { imageSrc: '', grid: 10, mouse: 0.1, strength: 0.15, relaxation: 0.9 });
     }
 
     /* ================================
