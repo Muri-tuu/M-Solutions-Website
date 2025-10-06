@@ -222,9 +222,9 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ================================
        HERO WAVES BACKGROUND
        ================================ */
-    const heroLights = document.getElementById('lights');
-    if (heroLights && window.initHyperspeed) {
-        window.initHyperspeed(heroLights, {});
+    const heroBallpit = document.getElementById('ballpit');
+    if (heroBallpit && window.initBallpit) {
+        window.initBallpit(heroBallpit, { count: 160, gravity: 0.7, friction: 0.92, wallBounce: 0.96, followCursor: true });
     }
 
     /* ================================
