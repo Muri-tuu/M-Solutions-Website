@@ -2,7 +2,7 @@
   // Advanced vanilla Ballpit: instanced spheres with continuous motion and cursor coupling
   function initBallpit(canvas, opts){
     if(!window.THREE){ console.warn('THREE not loaded'); return; }
-    const options = Object.assign({ count: 200, gravity: 0.6, friction: 0.992, wallBounce: 0.96, followCursor: true, maxVelocity: 0.4 }, opts||{});
+    const options = Object.assign({ count: 200, gravity: 0.6, friction: 0.992, wallBounce: 0.96, followCursor: true, maxVelocity: 0.5, separationMargin: 0.15 }, opts||{});
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
     const scene = new THREE.Scene();
@@ -44,16 +44,25 @@
 
     function rand(a,b){ return a + Math.random()*(b-a); }
 
+    // Initialize positions with rejection sampling to avoid overlaps
+    function farEnough(ix, x, y, z, size){
+      const minSepSqBase = (size + options.separationMargin);
+      for(let j=0;j<ix;j++){
+        const bj=j*3; const sj=sizes[j]||1.0;
+        const dx = x-positions[bj+0], dy=y-positions[bj+1], dz=z-positions[bj+2];
+        const minSep = minSepSqBase + sj; if (dx*dx+dy*dy+dz*dz < (minSep*minSep)) return false;
+      }
+      return true;
+    }
     for(let i=0;i<count;i++){
       const base = i*3;
-      positions[base+0] = rand(-18,18);
-      positions[base+1] = rand(-10,10);
-      positions[base+2] = rand(-6,6);
+      sizes[i] = rand(0.6, 1.4);
+      phases[i] = rand(0, Math.PI*2);
+      let px,py,pz,tries=0; do { px=rand(-18,18); py=rand(-10,10); pz=rand(-6,6); tries++; } while(!farEnough(i,px,py,pz,sizes[i]) && tries<200);
+      positions[base+0] = px; positions[base+1] = py; positions[base+2] = pz;
       velocities[base+0] = rand(-0.4,0.4);
       velocities[base+1] = rand(-0.2,0.6);
       velocities[base+2] = rand(-0.4,0.4);
-      sizes[i] = rand(0.6, 1.4);
-      phases[i] = rand(0, Math.PI*2);
       // instance color
       color.copy(palette[i%palette.length]);
       inst.instanceColor.setXYZ(i, color.r, color.g, color.b);
@@ -76,8 +85,19 @@
     }
     window.addEventListener('resize', resize); resize();
 
-    function onMove(e){ const rect=canvas.getBoundingClientRect(); mouse.x=((e.clientX-rect.left)/rect.width)*2-1; mouse.y=-(((e.clientY-rect.top)/rect.height)*2-1); ray.setFromCamera(mouse, camera); ray.ray.intersectPlane(plane, attract); }
+    let attractStrength = 0.6; // stronger on hover
+    function onMove(e){
+      const rect=canvas.getBoundingClientRect();
+      const inside = e.clientX>=rect.left && e.clientX<=rect.right && e.clientY>=rect.top && e.clientY<=rect.bottom;
+      attractStrength = inside ? 1.0 : 0.35;
+      mouse.x=((e.clientX-rect.left)/rect.width)*2-1; mouse.y=-(((e.clientY-rect.top)/rect.height)*2-1); ray.setFromCamera(mouse, camera); ray.ray.intersectPlane(plane, attract);
+    }
     if(options.followCursor){ window.addEventListener('mousemove', onMove); }
+
+    // Scroll coupling
+    let scrollVel = 0;
+    function onWheel(ev){ scrollVel += -Math.sign(ev.deltaY) * 0.12; }
+    window.addEventListener('wheel', onWheel, { passive: true });
 
     function clampMag(vx, vy, vz, max){ const m = Math.hypot(vx, vy, vz); if(m>max){ const f=max/m; return [vx*f, vy*f, vz*f]; } return [vx,vy,vz]; }
 
@@ -102,10 +122,12 @@
           const dy = attract.y - positions[b+1];
           const dz = attract.z - positions[b+2];
           const invDist = 1/Math.max(0.001, Math.hypot(dx,dy,dz));
-          vx += dx * invDist * 0.6 * dt;
-          vy += dy * invDist * 0.6 * dt;
-          vz += dz * invDist * 0.6 * dt;
+          vx += dx * invDist * attractStrength * dt;
+          vy += dy * invDist * attractStrength * dt;
+          vz += dz * invDist * attractStrength * dt;
         }
+        // scroll influence (global y impulse with decay)
+        vy += scrollVel * 0.02;
         // friction and clamp
         vx *= options.friction; vy *= options.friction; vz *= options.friction;
         [vx,vy,vz] = clampMag(vx,vy,vz, options.maxVelocity);
@@ -122,6 +144,27 @@
         if(Math.abs(positions[b+2])+sx > bounds.z){ positions[b+2] = Math.sign(positions[b+2])*(bounds.z - sx); velocities[b+2] *= -options.wallBounce; }
       }
 
+      // decay scroll velocity
+      scrollVel *= 0.92;
+
+      // Pairwise separation to avoid contact
+      const sepMargin = options.separationMargin;
+      for(let i=0;i<count;i++){
+        const bi=i*3; const si=sizes[i];
+        for(let j=i+1;j<count;j++){
+          const bj=j*3; const sj=sizes[j];
+          let dx = positions[bi+0]-positions[bj+0];
+          let dy = positions[bi+1]-positions[bj+1];
+          let dz = positions[bi+2]-positions[bj+2];
+          const distSq = dx*dx+dy*dy+dz*dz; const minSep = si+sj+sepMargin; const minSepSq = minSep*minSep;
+          if(distSq < minSepSq){
+            const dist = Math.sqrt(distSq)||0.0001; const overlap = (minSep - dist)*0.5; dx/=dist; dy/=dist; dz/=dist;
+            positions[bi+0]+= dx*overlap; positions[bi+1]+= dy*overlap; positions[bi+2]+= dz*overlap;
+            positions[bj+0]-= dx*overlap; positions[bj+1]-= dy*overlap; positions[bj+2]-= dz*overlap;
+          }
+        }
+      }
+
       // write transforms
       for(let i=0;i<count;i++){
         const b=i*3; tmpPos.set(positions[b+0], positions[b+1], positions[b+2]); tmpMat.makeTranslation(tmpPos.x, tmpPos.y, tmpPos.z); tmpMat.multiply(new THREE.Matrix4().makeScale(sizes[i], sizes[i], sizes[i])); inst.setMatrixAt(i, tmpMat);
@@ -134,7 +177,7 @@
 
     tick();
 
-    canvas._ballpit = { dispose: function(){ window.removeEventListener('resize', resize); if(options.followCursor){ window.removeEventListener('mousemove', onMove); } renderer.dispose(); } };
+    canvas._ballpit = { dispose: function(){ window.removeEventListener('resize', resize); window.removeEventListener('wheel', onWheel); if(options.followCursor){ window.removeEventListener('mousemove', onMove); } renderer.dispose(); } };
   }
   window.initBallpit = initBallpit;
 })();
