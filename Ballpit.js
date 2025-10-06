@@ -27,7 +27,7 @@
       const size = 0.6 + Math.random()*1.2; sizes.push(size); mesh.scale.set(size,size,size);
       mesh.position.set((Math.random()-0.5)*20, (Math.random()-0.5)*12, (Math.random()-0.5)*6);
       spheres.push(mesh); scene.add(mesh);
-      velocities.push(new THREE.Vector3((Math.random()-0.5)*0.3, (Math.random()-0.5)*0.3, (Math.random()-0.5)*0.3));
+      velocities.push(new THREE.Vector3((Math.random()-0.5)*0.6, (Math.random()-0.5)*0.6, (Math.random()-0.5)*0.6));
     }
 
     let bounds = { x: 14, y: 9, z: 6 };
@@ -43,14 +43,14 @@
     function tick(){
       for(let i=0;i<spheres.length;i++){
         const s = spheres[i]; const v = velocities[i]; const size = sizes[i];
-        v.y -= options.gravity*0.01*size; // gravity
+        v.y -= options.gravity*0.008*size; // gravity slightly lighter for fluidity
         s.position.add(v);
         // walls
         if(Math.abs(s.position.x)+size > bounds.x){ s.position.x = Math.sign(s.position.x)*(bounds.x-size); v.x *= -options.wallBounce; }
         if(Math.abs(s.position.y)+size > bounds.y){ s.position.y = Math.sign(s.position.y)*(bounds.y-size); v.y *= -options.wallBounce; v.y *= options.friction; }
         if(Math.abs(s.position.z)+size > bounds.z){ s.position.z = Math.sign(s.position.z)*(bounds.z-size); v.z *= -options.wallBounce; }
         // cursor attraction
-        if(options.followCursor){ const dir = worldMouse.clone().sub(s.position); const dist = dir.length()+0.0001; dir.normalize(); v.addScaledVector(dir, 0.002*size*Math.min(10,1/dist)); }
+        if(options.followCursor){ const dir = worldMouse.clone().sub(s.position); const dist = dir.length()+0.0001; dir.normalize(); v.addScaledVector(dir, 0.004*size*Math.min(10,1/dist)); }
         // friction
         v.multiplyScalar(options.friction);
       }
