@@ -389,7 +389,7 @@ html[data-theme="dark"] .hero::before { content: none; }
 
 /* Distorted grid background */
 .services .services-bg { display: none; }
-.services .letterglitch { position:absolute; inset:0; z-index:0; pointer-events:none; }
+.services .letterglitch { position:absolute; inset:0; z-index:0; pointer-events:none; opacity: 0.22; }
 
 .services .container {
     position: relative;
