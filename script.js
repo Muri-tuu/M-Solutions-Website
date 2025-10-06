@@ -200,10 +200,9 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ================================
        SERVICES GRID DISTORTION BACKGROUND (THREE.js)
        ================================ */
-    const servicesBg = document.querySelector('.services .services-bg');
-    if (servicesBg && window.initGridDistortion) {
-        // No background image per request; use a neutral 1x1 transparent texture
-        window.initGridDistortion(servicesBg, { imageSrc: '', grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 });
+    const productsBg = document.querySelector('.products .products-bg');
+    if (productsBg && window.initGridDistortion) {
+        window.initGridDistortion(productsBg, { imageSrc: '', grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 });
     }
     
     /* ================================
@@ -217,6 +216,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const scrolled = window.scrollY > 50;
             header.style.boxShadow = scrolled ? '0 12px 30px rgba(0,0,0,0.08)' : '0 10px 30px rgba(0,0,0,0.05)';
         });
+    }
+
+    // Services LetterGlitch init
+    const letterGlitch = document.getElementById('letterglitch');
+    if (letterGlitch && window.initLetterGlitch) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const glitchColors = isDark ? ['#1f2937','#4b5563','#9ca3af'] : ['#e5e7eb','#93c5fd','#34d399'];
+        window.initLetterGlitch(letterGlitch, { glitchColors, glitchSpeed: 60, centerVignette: true, outerVignette: false, smooth: true });
     }
 
     /* ================================

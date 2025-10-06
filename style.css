@@ -388,13 +388,8 @@ html[data-theme="dark"] .hero::before { content: none; }
 }
 
 /* Distorted grid background */
-.services .services-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.25;
-    pointer-events: none;
-}
+.services .services-bg { display: none; }
+.services .letterglitch { position:absolute; inset:0; z-index:0; pointer-events:none; }
 
 .services .container {
     position: relative;
@@ -470,6 +465,9 @@ html[data-theme="dark"] .hero::before { content: none; }
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-md);
 }
+.products { position: relative; }
+.products .products-bg { position:absolute; inset:0; z-index:0; opacity:0.22; pointer-events:none; }
+.products .container { position: relative; z-index: 1; }
 
 .product-card {
     background-color: var(--white-color);
