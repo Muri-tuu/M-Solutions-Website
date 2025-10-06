@@ -75,10 +75,7 @@ body {
     line-height: 1.6;
     background-color: var(--background-color);
     /* Site-wide subtle brand mesh to unify sections */
-    background-image:
-      radial-gradient(1200px 500px at 10% 10%, rgba(255,107,53,0.06), rgba(57,255,20,0) 60%),
-      radial-gradient(1000px 400px at 90% 20%, rgba(57,255,20,0.05), rgba(255,107,53,0) 60%);
-    background-attachment: fixed;
+    background-image: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -284,6 +281,7 @@ ul {
 }
 .hero #hero-letterglitch { position:absolute; inset:0; z-index:0; opacity:0.18; pointer-events:none; }
 .hero #hero-products-bg { position:absolute; inset:0; z-index:0; opacity:0.18; pointer-events:none; }
+.hero #hero-products-bg::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%); }
 
 /* Hero brand gradient that fades into the page to remove boundaries */
 /* Remove previous hero overlay backgrounds */
@@ -384,6 +382,7 @@ html[data-theme="dark"] .hero::before { content: none; }
     margin-top: 0; /* no overlap with hero */
     padding-top: var(--spacing-xl);
 }
+.services .letterglitch::after { content:""; position:absolute; inset:0; pointer-events:none; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%); }
 
 .services-grid {
     display: grid;
@@ -471,6 +470,7 @@ html[data-theme="dark"] .hero::before { content: none; }
 }
 .products { position: relative; }
 .products .products-bg { position:absolute; inset:0; z-index:0; opacity:0.22; pointer-events:none; }
+.products .products-bg::after { content:""; position:absolute; inset:0; pointer-events:none; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%); }
 .products .container { position: relative; z-index: 1; }
 
 .product-card {
