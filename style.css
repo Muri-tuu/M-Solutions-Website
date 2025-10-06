@@ -136,6 +136,7 @@ ul {
     align-items: center;
     padding: var(--spacing-sm) 0;
 }
+.navbar .nav-menu { visibility: hidden; height: 0; }
 
 .logo {
     display: flex;

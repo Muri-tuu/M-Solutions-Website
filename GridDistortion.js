@@ -48,7 +48,8 @@
       var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       ctx.fillStyle = 'rgba(0,0,0,0)';
       ctx.fillRect(0,0,size,size);
-      ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)';
+      // Lighter grid in light mode to keep content readable
+      ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)';
       ctx.lineWidth = 1;
       for (var x=0; x<=size; x+=gap){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,size); ctx.stroke(); }
       for (var y=0; y<=size; y+=gap){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(size,y); ctx.stroke(); }

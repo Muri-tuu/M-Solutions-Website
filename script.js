@@ -264,6 +264,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (waFloat && window.initClickSpark) {
         window.initClickSpark(waFloat, { sparkColor: '#FF6B35', sparkSize: 10, sparkRadius: 18, sparkCount: 10, duration: 420, extraScale: 1.1 });
     }
+
+    // Initialize docks
+    if (window.initMainDock) { window.initMainDock(); }
+    if (window.initUtilityDock) { window.initUtilityDock(); }
     
     /* ================================
        PLACEHOLDER FOR FUTURE FEATURES
