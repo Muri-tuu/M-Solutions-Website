@@ -65,6 +65,8 @@ html[data-theme="dark"] {
 
 html {
     scroll-behavior: smooth;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 2000px;
 }
 
 body {

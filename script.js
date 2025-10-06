@@ -201,8 +201,12 @@ document.addEventListener('DOMContentLoaded', function() {
        SERVICES GRID DISTORTION BACKGROUND (THREE.js)
        ================================ */
     const productsBg = document.querySelector('.products .products-bg');
+    const runWhenIdle = (fn) => {
+        if ('requestIdleCallback' in window) { requestIdleCallback(fn, { timeout: 1500 }); }
+        else { setTimeout(fn, 300); }
+    };
     if (productsBg && window.initGridDistortion) {
-        window.initGridDistortion(productsBg, { imageSrc: '', grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 });
+        runWhenIdle(() => window.initGridDistortion(productsBg, { imageSrc: '', grid: 12, mouse: 0.12, strength: 0.18, relaxation: 0.9 }));
     }
     
     /* ================================
@@ -221,9 +225,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Services LetterGlitch init
     const letterGlitch = document.getElementById('letterglitch');
     if (letterGlitch && window.initLetterGlitch) {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const glitchColors = isDark ? ['#1f2937','#4b5563','#9ca3af'] : ['#e5e7eb','#93c5fd','#34d399'];
-        window.initLetterGlitch(letterGlitch, { glitchColors, glitchSpeed: 60, centerVignette: true, outerVignette: false, smooth: true });
+        runWhenIdle(() => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const glitchColors = isDark ? ['#1f2937','#4b5563','#9ca3af'] : ['#e5e7eb','#93c5fd','#34d399'];
+            window.initLetterGlitch(letterGlitch, { glitchColors, glitchSpeed: 60, centerVignette: true, outerVignette: false, smooth: true });
+        });
     }
 
     /* ================================
@@ -232,13 +238,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hero composite: services LetterGlitch + products GridDistortion
     const heroLetter = document.getElementById('hero-letterglitch');
     if (heroLetter && window.initLetterGlitch) {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const glitchColors = isDark ? ['#1f2937','#4b5563','#9ca3af'] : ['#e5e7eb','#93c5fd','#34d399'];
-        window.initLetterGlitch(heroLetter, { glitchColors, glitchSpeed: 70, centerVignette: false, outerVignette: false, smooth: true });
+        runWhenIdle(() => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const glitchColors = isDark ? ['#1f2937','#4b5563','#9ca3af'] : ['#e5e7eb','#93c5fd','#34d399'];
+            window.initLetterGlitch(heroLetter, { glitchColors, glitchSpeed: 70, centerVignette: false, outerVignette: false, smooth: true });
+        });
     }
     const heroProductsBg = document.getElementById('hero-products-bg');
     if (heroProductsBg && window.initGridDistortion) {
-        window.initGridDistortion(heroProductsBg, { imageSrc: '', grid: 10, mouse: 0.1, strength: 0.15, relaxation: 0.9 });
+        runWhenIdle(() => window.initGridDistortion(heroProductsBg, { imageSrc: '', grid: 10, mouse: 0.1, strength: 0.15, relaxation: 0.9 }));
     }
 
     /* ================================
