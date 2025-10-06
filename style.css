@@ -282,6 +282,8 @@ ul {
 .hero #hero-letterglitch { position:absolute; inset:0; z-index:0; opacity:0.18; pointer-events:none; }
 .hero #hero-products-bg { position:absolute; inset:0; z-index:0; opacity:0.18; pointer-events:none; }
 .hero #hero-products-bg::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%); }
+/* Disable hero grid distortion in light mode */
+html:not([data-theme="dark"]) .hero #hero-products-bg { display: none; }
 
 /* Hero brand gradient that fades into the page to remove boundaries */
 /* Remove previous hero overlay backgrounds */
@@ -393,6 +395,8 @@ html[data-theme="dark"] .hero::before { content: none; }
 /* Distorted grid background */
 .services .services-bg { display: none; }
 .services .letterglitch { position:absolute; inset:0; z-index:0; pointer-events:none; opacity: 0.22; }
+/* Disable services background in light mode */
+html:not([data-theme="dark"]) .services .letterglitch { display: none; }
 
 .services .container {
     position: relative;
@@ -470,6 +474,9 @@ html[data-theme="dark"] .hero::before { content: none; }
 }
 .products { position: relative; }
 .products .products-bg { position:absolute; inset:0; z-index:0; opacity:0.22; pointer-events:none; }
+.products .products-bg::after { content:""; position:absolute; inset:0; pointer-events:none; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%); }
+/* Disable products grid distortion in light mode */
+html:not([data-theme="dark"]) .products .products-bg { display: none; }
 .products .products-bg::after { content:""; position:absolute; inset:0; pointer-events:none; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%); }
 .products .container { position: relative; z-index: 1; }
 
@@ -684,6 +691,7 @@ html[data-theme="dark"] .service-description {
     -webkit-backdrop-filter: blur(10px) saturate(1.4);
     border: 1px solid rgba(255, 255, 255, 0.25);
     overflow: visible;
+    position: fixed;
 }
 
 .whatsapp-float:hover {
