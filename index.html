@@ -73,7 +73,7 @@
                         <i class="fa-regular fa-heart" aria-hidden="true"></i>
                         <span class="badge" id="wishlist-count" aria-hidden="true">0</span>
                     </button>
-                    <button class="icon-btn cart-toggle" aria-label="Open cart" title="Cart">
+                    <button class="icon-btn cart-toggle" aria-label="Open cart" title="Cart" data-open-cart>
                         <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
                         <span class="badge" id="cart-count" aria-hidden="true">0</span>
                     </button>
@@ -203,9 +203,7 @@
     <!-- Products Section -->
     <section id="products" class="products">
         <div class="products-bg distortion-container" aria-hidden="true"></div>
-        <div style="position:absolute;top:8px;right:8px;z-index:2;">
-          <button data-open-cart class="btn btn-secondary">Open Cart</button>
-        </div>
+        
         <div class="container">
             <h2 class="section-title">Featured Products</h2>
             <p class="section-subtitle">Premium quality at affordable prices</p>
@@ -384,14 +382,7 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/254115594826?text=Hi%20M%20Solutions!%20I'm%20interested%20in%20your%20products%20and%20services.%20%5BSource:%20Website%5D" 
-       class="whatsapp-float" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>

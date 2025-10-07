@@ -12,7 +12,7 @@
 
   function readCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY)||'[]');}catch{return [];} }
   function writeCart(items){ localStorage.setItem(CART_KEY, JSON.stringify(items)); }
-  function addItem(item){ const cart=readCart(); const idx=cart.findIndex(i=>i.productId===item.productId); if(idx>-1){ cart[idx].quantity+=item.quantity; } else { cart.push(item); } writeCart(cart); render(); }
+  function addItem(item){ const cart=readCart(); const idx=cart.findIndex(i=>i.productId===item.productId); if(idx>-1){ cart[idx].quantity+=item.quantity; } else { cart.push(item); } writeCart(cart); syncBadge(); render(); openCart(); }
   function removeItem(productId){ const cart=readCart().filter(i=>i.productId!==productId); writeCart(cart); render(); }
   function updateQty(productId, qty){ const cart=readCart(); const it=cart.find(i=>i.productId===productId); if(it){ it.quantity=Math.max(1,qty); writeCart(cart); render(); } }
 
@@ -28,10 +28,12 @@
     const qtyInputs = root.querySelectorAll('.qty-input'); qtyInputs.forEach(inp=> inp.addEventListener('change', (e)=> updateQty(e.target.getAttribute('data-id'), parseInt(e.target.value,10)||1)));
     const rmButtons = root.querySelectorAll('.remove-btn'); rmButtons.forEach(btn=> btn.addEventListener('click', (e)=> removeItem(e.target.getAttribute('data-id'))));
     panel.dataset.total = total;
+    const badge = document.getElementById('cart-count'); if(badge){ badge.textContent = String(items.reduce((s,i)=> s + i.quantity, 0)); }
   }
 
   function openCart(){ modal.style.display='flex'; render(); }
   function closeCart(){ modal.style.display='none'; }
+  function syncBadge(){ const items=readCart(); const badge = document.getElementById('cart-count'); if(badge){ badge.textContent = String(items.reduce((s,i)=> s + i.quantity, 0)); } }
 
   document.addEventListener('click', (e)=>{
     const addBtn = e.target.closest('[data-add-to-cart]');
@@ -72,4 +74,5 @@
 
   // Expose for manual open
   window.MSolutionsCart = { open: openCart, add: addItem };
+  syncBadge();
 })();
