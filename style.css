@@ -219,6 +219,9 @@ ul {
     box-shadow: var(--shadow-md);
 }
 
+/* Disable light mode switch: hide theme toggle */
+.theme-toggle { display: none !important; }
+
 .nav-link {
     color: var(--dark-color);
     font-weight: 500;

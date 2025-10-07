@@ -9,12 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
        ================================ */
     const root = document.documentElement;
     const themeToggleButton = document.querySelector('.theme-toggle');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const storedTheme = localStorage.getItem('theme');
-    const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
-    if (initialTheme === 'dark') {
-        root.setAttribute('data-theme', 'dark');
-    }
+    // Force dark mode site-wide
+    root.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
     const setToggleIcon = () => {
         if (!themeToggleButton) return;
         const icon = themeToggleButton.querySelector('i');
@@ -27,28 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     setToggleIcon();
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', () => {
-            // ripple
-            const rect = themeToggleButton.getBoundingClientRect();
-            const ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            ripple.style.left = rect.width / 2 + 'px';
-            ripple.style.top = rect.height / 2 + 'px';
-            themeToggleButton.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-
-            const isDark = root.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                root.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                root.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-            setToggleIcon();
-        });
-    }
+    // No-op: theme toggle disabled
     
     /* ================================
        SERVICES SPOTLIGHT EFFECT
