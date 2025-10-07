@@ -181,6 +181,12 @@ ul {
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+.icon-btn .fa-heart { color: #e11d48; }
+html[data-theme="dark"] .icon-btn .fa-heart { color: #f43f5e; }
+
+/* Wishlist button inside product card footer */
+.pc-wishlist-btn{ position:absolute; left:8px; top:50%; transform:translateY(-50%); width:36px; height:36px; border-radius:9999px; display:inline-flex; align-items:center; justify-content:center; background:var(--light-color); border:1px solid var(--card-border-color); box-shadow:var(--shadow-sm); color:var(--dark-color); }
+html[data-theme="dark"] .pc-wishlist-btn{ background:#0f131a; color:#e5e7eb; }
 
 .icon-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
@@ -670,6 +676,9 @@ html[data-theme="dark"] .service-description {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--gray-light);
 }
+
+/* Remove any cart/footer overlap visuals in modal context */
+body:has(#cart-modal[style*="display: flex"]) .footer { filter: blur(1px) brightness(0.9); }
 
 /* ================================
    FLOATING WHATSAPP BUTTON

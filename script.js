@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
        CART & WISHLIST (LOCALSTORAGE)
        Minimal counters to support UI badges
        ================================ */
-    const CART_KEY = 'msolutions_cart_items';
-    const WISHLIST_KEY = 'msolutions_wishlist_items';
+    const CART_KEY = 'msolutions_cart_v1';
+    const WISHLIST_KEY = 'msolutions_wishlist_v1';
     const cartToggle = document.querySelector('.cart-toggle');
     const wishlistToggle = document.querySelector('.wishlist-toggle');
     const cartCountEl = document.getElementById('cart-count');
@@ -114,33 +114,12 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     updateBadges();
     if (cartToggle) cartToggle.addEventListener('click', () => {
-        // ripple
-        const rect = cartToggle.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        ripple.style.left = rect.width / 2 + 'px';
-        ripple.style.top = rect.height / 2 + 'px';
-        cartToggle.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-
-        const items = readStore(CART_KEY);
-        // Placeholder interaction: add a demo item to show count increment
-        items.push({ id: Date.now(), name: 'Sample Item' });
-        writeStore(CART_KEY, items);
-        updateBadges();
+        if (window.MSolutionsCart && typeof window.MSolutionsCart.open === 'function') {
+            window.MSolutionsCart.open();
+        }
     });
     if (wishlistToggle) wishlistToggle.addEventListener('click', () => {
-        // ripple
-        const rect = wishlistToggle.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        ripple.style.left = rect.width / 2 + 'px';
-        ripple.style.top = rect.height / 2 + 'px';
-        wishlistToggle.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-
         const items = readStore(WISHLIST_KEY);
-        items.push({ id: Date.now(), name: 'Wishlist Item' });
         writeStore(WISHLIST_KEY, items);
         updateBadges();
     });

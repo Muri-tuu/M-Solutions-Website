@@ -2,11 +2,27 @@
   const CART_KEY = 'msolutions_cart_v1';
   const modal = document.createElement('div'); modal.id='cart-modal';
   const panel = document.createElement('div'); panel.id='cart'; panel.innerHTML = `
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <div class="cart-actions">
-      <button id="cart-close">Close</button>
-      <button id="cart-checkout">Checkout</button>
+    <div class="cart-layout">
+      <div class="cart-list">
+        <h3>Cart</h3>
+        <div id="cart-items"></div>
+      </div>
+      <aside class="cart-summary">
+        <h4>Checkout</h4>
+        <form id="checkout-form" class="checkout-form">
+          <input type="text" id="co-name" placeholder="Full name" required />
+          <input type="tel" id="co-phone" placeholder="Phone (2547...)" required />
+          <input type="text" id="co-address" placeholder="Address (optional)" />
+          <select id="co-payment">
+            <option value="M-PESA">M-Pesa (Pay now)</option>
+            <option value="COD">Cash on Delivery</option>
+          </select>
+        </form>
+        <div class="cart-actions">
+          <button id="cart-close" class="btn-ghost">Close</button>
+          <button id="cart-checkout" class="btn-gradient">Place Order</button>
+        </div>
+      </aside>
     </div>
   `; modal.appendChild(panel); document.body.appendChild(modal);
 
@@ -16,12 +32,14 @@
   function removeItem(productId){ const cart=readCart().filter(i=>i.productId!==productId); writeCart(cart); render(); }
   function updateQty(productId, qty){ const cart=readCart(); const it=cart.find(i=>i.productId===productId); if(it){ it.quantity=Math.max(1,qty); writeCart(cart); render(); } }
 
-  function render(){ const items=readCart(); const root=document.getElementById('cart-items'); if(!root) return; root.innerHTML=''; let total=0; items.forEach(it=>{ total += it.price*it.quantity; const row=document.createElement('div'); row.className='cart-item'; row.innerHTML = `
-      <div>
-        <div><strong>${it.name}</strong></div>
-        <div>KSh ${it.price} x <input type="number" min="1" value="${it.quantity}" data-id="${it.productId}" class="qty-input" style="width:60px"></div>
+  function render(){ const items=readCart(); const root=document.getElementById('cart-items'); if(!root) return; root.innerHTML=''; let total=0; items.forEach(it=>{ total += it.price*it.quantity; const row=document.createElement('div'); row.className='cart-item-card'; const img = it.image ? `<img src="${it.image}" alt="${it.name}">` : `<div style="width:96px;height:96px;border-radius:12px;background:#1113;"></div>`; row.innerHTML = `
+      ${img}
+      <div class="cart-item-meta">
+        <h4>${it.name}</h4>
+        <p>KSh ${it.price}</p>
       </div>
-      <div>
+      <div class="cart-qty">
+        <input type="number" min="1" value="${it.quantity}" data-id="${it.productId}" class="qty-input">
         <button class="remove-btn" data-id="${it.productId}">Remove</button>
       </div>
     `; root.appendChild(row); });
@@ -42,7 +60,21 @@
       const productId = el.getAttribute('data-id');
       const name = el.getAttribute('data-name')||'Product';
       const price = parseFloat(el.getAttribute('data-price')||'0');
-      addItem({ productId, name, price, quantity: 1 });
+      const image = el.getAttribute('data-image')||'';
+      addItem({ productId, name, price, image, quantity: 1 });
+    }
+    const wishBtn = e.target.closest('[data-add-to-wishlist]');
+    if(wishBtn){
+      try{
+        const WKEY='msolutions_wishlist_v1';
+        const store = JSON.parse(localStorage.getItem(WKEY)||'[]');
+        const pid = wishBtn.getAttribute('data-id');
+        const name = wishBtn.getAttribute('data-name')||'Product';
+        const image = wishBtn.getAttribute('data-image')||'';
+        if(!store.find(i=>i.productId===pid)) store.push({productId:pid,name,image});
+        localStorage.setItem(WKEY, JSON.stringify(store));
+        const wbadge=document.getElementById('wishlist-count'); if(wbadge){ wbadge.textContent=String(store.length); }
+      }catch{}
     }
     if(e.target.id==='cart-close'){ closeCart(); }
     if(e.target.id==='cart-checkout'){ checkout(); }
@@ -51,12 +83,14 @@
 
   async function checkout(){
     const items = readCart(); if(!items.length){ alert('Cart is empty'); return; }
-    const name = prompt('Your name?'); if(!name) return;
-    const phone = prompt('Phone (2547...)?'); if(!phone) return;
-    const paymentMode = confirm('Pay now with M-Pesa? OK=Yes, Cancel=Cash on Delivery') ? 'M-PESA' : 'COD';
+    const name = (document.getElementById('co-name')||{}).value || '';
+    const phone = (document.getElementById('co-phone')||{}).value || '';
+    const address = (document.getElementById('co-address')||{}).value || '';
+    const paymentMode = (document.getElementById('co-payment')||{}).value || 'M-PESA';
+    if(!name || !phone){ alert('Please fill name and phone'); return; }
     const total = items.reduce((s,i)=> s + i.price*i.quantity, 0);
     const order = {
-      customer: { name, phone },
+      customer: { name, phone, address },
       items: items.map(i=> ({ productId: i.productId, name: i.name, quantity: i.quantity, price: i.price })),
       total, paymentMode
     };
