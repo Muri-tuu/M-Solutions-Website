@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     updateBadges();
     if (cartToggle) cartToggle.addEventListener('click', () => {
+        if (document.documentElement.getAttribute('data-cart-disabled') === 'true') return;
         if (window.MSolutionsCart && typeof window.MSolutionsCart.open === 'function') {
             window.MSolutionsCart.open();
         }

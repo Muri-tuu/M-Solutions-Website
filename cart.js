@@ -26,9 +26,10 @@
     </div>
   `; modal.appendChild(panel); document.body.appendChild(modal);
 
+  function isDisabled(){ return document.documentElement.getAttribute('data-cart-disabled') === 'true'; }
   function readCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY)||'[]');}catch{return [];} }
   function writeCart(items){ localStorage.setItem(CART_KEY, JSON.stringify(items)); }
-  function addItem(item){ const cart=readCart(); const idx=cart.findIndex(i=>i.productId===item.productId); if(idx>-1){ cart[idx].quantity+=item.quantity; } else { cart.push(item); } writeCart(cart); syncBadge(); render(); openCart(); }
+  function addItem(item){ if(isDisabled()) return; const cart=readCart(); const idx=cart.findIndex(i=>i.productId===item.productId); if(idx>-1){ cart[idx].quantity+=item.quantity; } else { cart.push(item); } writeCart(cart); syncBadge(); render(); openCart(); }
   function removeItem(productId){ const cart=readCart().filter(i=>i.productId!==productId); writeCart(cart); syncBadge(); render(); }
   function updateQty(productId, qty){ const cart=readCart(); const it=cart.find(i=>i.productId===productId); if(it){ it.quantity=Math.max(1,qty); writeCart(cart); syncBadge(); render(); } }
 
@@ -54,13 +55,14 @@
     const summary = document.querySelector('.cart-summary'); if(summary){ summary.querySelector('.summary-box')?.remove?.(); const count = items.reduce((s,i)=> s + i.quantity, 0); const box = document.createElement('div'); box.className='summary-box'; box.innerHTML = `<div class="summary-row"><span>Items</span><span>${count}</span></div><div class="summary-row"><span>Subtotal</span><span>KSh ${total}</span></div><div class="summary-row summary-total"><span>Total</span><span>KSh ${total}</span></div>`; summary.insertBefore(box, summary.querySelector('.checkout-form')); }
   }
 
-  function openCart(){ modal.classList.add('active'); modal.style.display='flex'; render(); }
+  function openCart(){ if(isDisabled()) return; modal.classList.add('active'); modal.style.display='flex'; render(); }
   function closeCart(){ modal.classList.remove('active'); modal.style.display='none'; }
   function syncBadge(){ const items=readCart(); const badge = document.getElementById('cart-count'); if(badge){ badge.textContent = String(items.reduce((s,i)=> s + i.quantity, 0)); } }
 
   document.addEventListener('click', (e)=>{
     const addBtn = e.target.closest('[data-add-to-cart]');
     if(addBtn){
+      if(isDisabled()){ e.preventDefault(); return; }
       const el = addBtn;
       const productId = el.getAttribute('data-id');
       const name = el.getAttribute('data-name')||'Product';
@@ -82,13 +84,14 @@
       }catch{}
     }
     if(e.target.id==='cart-close'){ closeCart(); }
-    if(e.target.id==='cart-checkout'){ checkout(); }
+    if(e.target.id==='cart-checkout'){ if(isDisabled()){ e.preventDefault(); return; } checkout(); }
     // Disable any non-navbar open triggers
   });
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeCart(); }});
   modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeCart(); }});
 
   async function checkout(){
+    if(isDisabled()) return;
     const items = readCart(); if(!items.length){ alert('Cart is empty'); return; }
     const name = (document.getElementById('co-name')||{}).value || '';
     const phone = (document.getElementById('co-phone')||{}).value || '';
