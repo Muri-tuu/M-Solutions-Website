@@ -83,7 +83,7 @@
     }
     if(e.target.id==='cart-close'){ closeCart(); }
     if(e.target.id==='cart-checkout'){ checkout(); }
-    const openBtn = e.target.closest('[data-open-cart]'); if(openBtn){ openCart(); }
+    // Disable any non-navbar open triggers
   });
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeCart(); }});
   modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeCart(); }});

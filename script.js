@@ -120,6 +120,14 @@ document.addEventListener('DOMContentLoaded', function() {
             window.MSolutionsCart.open();
         }
     });
+    // Prevent other elements from opening the cart
+    document.addEventListener('click', (e) => {
+        const nonNavOpen = e.target.closest('[data-open-cart]');
+        if (nonNavOpen && !e.target.closest('.cart-toggle')) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
     if (wishlistToggle) wishlistToggle.addEventListener('click', () => {
         const items = readStore(WISHLIST_KEY);
         writeStore(WISHLIST_KEY, items);
