@@ -109,8 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateBadges = () => {
         const cartItems = readStore(CART_KEY);
         const wishlistItems = readStore(WISHLIST_KEY);
-        if (cartCountEl) cartCountEl.textContent = String(cartItems.length);
-        if (wishlistCountEl) wishlistCountEl.textContent = String(wishlistItems.length);
+        const cartQty = Array.isArray(cartItems) ? cartItems.reduce((s,i)=> s + (Number(i.quantity)||0), 0) : 0;
+        const wishQty = Array.isArray(wishlistItems) ? wishlistItems.length : 0;
+        if (cartCountEl) cartCountEl.textContent = String(cartQty);
+        if (wishlistCountEl) wishlistCountEl.textContent = String(wishQty);
     };
     updateBadges();
     if (cartToggle) cartToggle.addEventListener('click', () => {

@@ -29,28 +29,33 @@
   function readCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY)||'[]');}catch{return [];} }
   function writeCart(items){ localStorage.setItem(CART_KEY, JSON.stringify(items)); }
   function addItem(item){ const cart=readCart(); const idx=cart.findIndex(i=>i.productId===item.productId); if(idx>-1){ cart[idx].quantity+=item.quantity; } else { cart.push(item); } writeCart(cart); syncBadge(); render(); openCart(); }
-  function removeItem(productId){ const cart=readCart().filter(i=>i.productId!==productId); writeCart(cart); render(); }
-  function updateQty(productId, qty){ const cart=readCart(); const it=cart.find(i=>i.productId===productId); if(it){ it.quantity=Math.max(1,qty); writeCart(cart); render(); } }
+  function removeItem(productId){ const cart=readCart().filter(i=>i.productId!==productId); writeCart(cart); syncBadge(); render(); }
+  function updateQty(productId, qty){ const cart=readCart(); const it=cart.find(i=>i.productId===productId); if(it){ it.quantity=Math.max(1,qty); writeCart(cart); syncBadge(); render(); } }
 
-  function render(){ const items=readCart(); const root=document.getElementById('cart-items'); if(!root) return; root.innerHTML=''; let total=0; items.forEach(it=>{ total += it.price*it.quantity; const row=document.createElement('div'); row.className='cart-item-card'; const img = it.image ? `<img src="${it.image}" alt="${it.name}">` : `<div style="width:96px;height:96px;border-radius:12px;background:#1113;"></div>`; row.innerHTML = `
+  function render(){ const items=readCart(); const root=document.getElementById('cart-items'); if(!root) return; root.innerHTML=''; if(items.length===0){ root.innerHTML = `<div class="empty-state">Your cart is empty.</div>`; panel.dataset.total = 0; const summary = document.querySelector('.cart-summary'); if(summary){ summary.querySelector('.summary-box')?.remove?.(); const box = document.createElement('div'); box.className='summary-box'; box.innerHTML = `<div class="summary-row"><span>Items</span><span>0</span></div><div class="summary-row"><span>Subtotal</span><span>KSh 0</span></div><div class="summary-row summary-total"><span>Total</span><span>KSh 0</span></div>`; summary.insertBefore(box, summary.querySelector('.checkout-form')); } return; } let total=0; items.forEach(it=>{ total += it.price*it.quantity; const row=document.createElement('div'); row.className='cart-item-card'; const img = it.image ? `<img src="${it.image}" alt="${it.name}">` : `<div style="width:96px;height:96px;border-radius:12px;background:#1113;"></div>`; row.innerHTML = `
       ${img}
       <div class="cart-item-meta">
         <h4>${it.name}</h4>
-        <p>KSh ${it.price}</p>
+        <p>KSh ${it.price} <span class="line-total">× ${it.quantity} = KSh ${it.price*it.quantity}</span></p>
       </div>
       <div class="cart-qty">
+        <button class="qty-dec" data-id="${it.productId}">−</button>
         <input type="number" min="1" value="${it.quantity}" data-id="${it.productId}" class="qty-input">
+        <button class="qty-inc" data-id="${it.productId}">+</button>
         <button class="remove-btn" data-id="${it.productId}">Remove</button>
       </div>
     `; root.appendChild(row); });
     const qtyInputs = root.querySelectorAll('.qty-input'); qtyInputs.forEach(inp=> inp.addEventListener('change', (e)=> updateQty(e.target.getAttribute('data-id'), parseInt(e.target.value,10)||1)));
+    const incBtns = root.querySelectorAll('.qty-inc'); incBtns.forEach(btn=> btn.addEventListener('click', (e)=> { const id=e.target.getAttribute('data-id'); const cart=readCart(); const it=cart.find(i=>i.productId===id); if(it){ it.quantity+=1; writeCart(cart); syncBadge(); render(); }}));
+    const decBtns = root.querySelectorAll('.qty-dec'); decBtns.forEach(btn=> btn.addEventListener('click', (e)=> { const id=e.target.getAttribute('data-id'); const cart=readCart(); const it=cart.find(i=>i.productId===id); if(it){ it.quantity=Math.max(1,it.quantity-1); writeCart(cart); syncBadge(); render(); }}));
     const rmButtons = root.querySelectorAll('.remove-btn'); rmButtons.forEach(btn=> btn.addEventListener('click', (e)=> removeItem(e.target.getAttribute('data-id'))));
     panel.dataset.total = total;
     const badge = document.getElementById('cart-count'); if(badge){ badge.textContent = String(items.reduce((s,i)=> s + i.quantity, 0)); }
+    const summary = document.querySelector('.cart-summary'); if(summary){ summary.querySelector('.summary-box')?.remove?.(); const count = items.reduce((s,i)=> s + i.quantity, 0); const box = document.createElement('div'); box.className='summary-box'; box.innerHTML = `<div class="summary-row"><span>Items</span><span>${count}</span></div><div class="summary-row"><span>Subtotal</span><span>KSh ${total}</span></div><div class="summary-row summary-total"><span>Total</span><span>KSh ${total}</span></div>`; summary.insertBefore(box, summary.querySelector('.checkout-form')); }
   }
 
-  function openCart(){ modal.style.display='flex'; render(); }
-  function closeCart(){ modal.style.display='none'; }
+  function openCart(){ modal.classList.add('active'); modal.style.display='flex'; render(); }
+  function closeCart(){ modal.classList.remove('active'); modal.style.display='none'; }
   function syncBadge(){ const items=readCart(); const badge = document.getElementById('cart-count'); if(badge){ badge.textContent = String(items.reduce((s,i)=> s + i.quantity, 0)); } }
 
   document.addEventListener('click', (e)=>{
@@ -80,6 +85,8 @@
     if(e.target.id==='cart-checkout'){ checkout(); }
     const openBtn = e.target.closest('[data-open-cart]'); if(openBtn){ openCart(); }
   });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeCart(); }});
+  modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeCart(); }});
 
   async function checkout(){
     const items = readCart(); if(!items.length){ alert('Cart is empty'); return; }
