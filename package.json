@@ -1,17 +1,44 @@
 {
   "name": "m-solutions",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "type": "module",
+  "description": "M Solutions - Campus e-commerce platform",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "main": "script.js",
   "scripts": {
-    "dev": "npx serve .",
-    "build": "echo \"No build step needed for static site\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"serve -p 5173 .\" \"tsx watch server/index.ts\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:static": "serve -p 5173 .",
+    "build:server": "tsc -p tsconfig.json",
+    "start": "node dist/server/index.js",
+    "smoke": "tsx server/smoke.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "echo 'no linter configured'",
+    "test": "echo 'no tests yet' && exit 0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "zod": "^3.23.8"
+  },
   "devDependencies": {
-    "serve": "^14.2.5"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.7.5",
+    "@types/supertest": "^6.0.3",
+    "concurrently": "^9.0.1",
+    "serve": "^14.2.5",
+    "supertest": "^7.1.4",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.8.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
   }
 }
