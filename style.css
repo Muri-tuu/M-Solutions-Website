@@ -36,7 +36,7 @@ Sections:
 11. CTA Section
 12. Footer
 13. Cart Modal
-14. Utilities (WhatsApp, Back to Top, Toast)
+14. Utilities (Back to Top, Toast)
 15. Responsive Breakpoints
 ================================================================================
 */
@@ -1132,57 +1132,12 @@ button {
 }
 
 /* ================================
-   WHATSAPP FLOAT
-   ================================ */
-.whatsapp-float {
-    position: fixed;
-    bottom: var(--space-6);
-    right: var(--space-6);
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: var(--white);
-    background: #25D366;
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-    z-index: 999;
-    transition: all var(--transition-base);
-}
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-}
-.whatsapp-tooltip {
-    position: absolute;
-    right: 70px;
-    padding: var(--space-2) var(--space-4);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    color: var(--gray-900);
-    background: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateX(10px);
-    transition: all var(--transition-fast);
-    pointer-events: none;
-}
-.whatsapp-float:hover .whatsapp-tooltip {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* ================================
    BACK TO TOP
    ================================ */
 .back-to-top {
     position: fixed;
     bottom: var(--space-6);
-    right: calc(var(--space-6) + 70px);
+    right: var(--space-6);
     width: 44px;
     height: 44px;
     display: flex;
@@ -1320,12 +1275,9 @@ button {
         max-width: 100%;
     }
     
-    .whatsapp-tooltip {
-        display: none;
-    }
     .back-to-top {
         right: var(--space-6);
-        bottom: calc(var(--space-6) + 70px);
+        bottom: var(--space-6);
     }
 }
 
