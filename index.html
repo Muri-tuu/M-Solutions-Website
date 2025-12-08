@@ -1,415 +1,650 @@
 <!DOCTYPE html>
-<html lang="en" data-cart-disabled="true">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FF6B35">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
-    <!-- SEO Meta Tags -->
-    <title>M Solutions - Campus Essentials & Tech Services</title>
-    <meta name="description" content="M Solutions offers premium campus essentials and professional tech services. Get quality products and expert solutions tailored for students and professionals.">
-    <meta name="keywords" content="campus essentials, tech services, student solutions, technology support, campus products">
-    <meta name="author" content="M Solutions">
+    <!-- Primary SEO -->
+    <title>M Solutions | #1 Campus Essentials & Tech Services in Kenya</title>
+    <meta name="description" content="Shop quality student supplies, calculators, lab coats, tech accessories & get expert computer repair services. Fast delivery across Kenya. Trusted by 500+ students.">
+    <meta name="keywords" content="student supplies Kenya, campus essentials Nairobi, scientific calculator, lab coat, engineering set, computer repair, tech services">
+    <meta name="author" content="M Solutions Kenya">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://msolutions.co.ke/">
     
-    <!-- Open Graph / Social Media Meta Tags -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://msolutions.com/">
-    <meta property="og:title" content="M Solutions - Campus Essentials & Tech Services">
-    <meta property="og:description" content="Premium campus essentials and professional tech services for students and professionals.">
-    <meta property="og:image" content="./assets/images/og-image.jpg">
+    <meta property="og:url" content="https://msolutions.co.ke/">
+    <meta property="og:title" content="M Solutions | Campus Essentials & Tech Services">
+    <meta property="og:description" content="Your one-stop shop for student supplies and professional tech services in Kenya.">
+    <meta property="og:image" content="https://msolutions.co.ke/assets/images/og-image.jpg">
     
-    <!-- Twitter Card Meta Tags -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://msolutions.com/">
-    <meta property="twitter:title" content="M Solutions - Campus Essentials & Tech Services">
-    <meta property="twitter:description" content="Premium campus essentials and professional tech services for students and professionals.">
-    <meta property="twitter:image" content="./assets/images/og-image.jpg">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="M Solutions | Campus Essentials & Tech Services">
+    <meta name="twitter:description" content="Quality student supplies and tech services. Fast delivery across Kenya.">
     
-    <!-- Favicon (local fallbacks already included above root-level) -->
+    <!-- Favicon & Theme -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/assets/images/logo-icon.svg">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FF6B35">
     
-    <!-- Stylesheet -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./SpotlightCard.css">
-    <link rel="stylesheet" href="./GridDistortion.css">
-    <link rel="stylesheet" href="./TiltedCard.css">
-    
-    <link rel="stylesheet" href="./Ballpit.css">
-    <link rel="stylesheet" href="./Dock.css">
-    <link rel="stylesheet" href="./ProfileCard.css">
-    
-    <!-- Font Awesome for Icons (CDN) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 </head>
 <body>
-    
-    <!-- Header / Navigation -->
-    <header class="header">
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p><i class="fas fa-truck"></i> Free delivery on orders over KSh 2,000 in Nairobi</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
         <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="./assets/images/Logo (2).png" alt="M Solutions Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <span class="logo-text">Solutions</span>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <img src="./assets/images/logo-icon.svg" alt="M Solutions" class="logo-img" width="40" height="40">
+                    <span class="logo-text">M Solutions</span>
+                </a>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#services" class="nav-link">Services</a></li>
                     <li><a href="#products" class="nav-link">Products</a></li>
+                    <li><a href="#reviews" class="nav-link">Reviews</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
-                <div class="navbar-actions">
-                    <button class="icon-btn wishlist-toggle" aria-label="Open wishlist" title="Wishlist">
-                        <i class="fa-regular fa-heart" aria-hidden="true"></i>
-                        <span class="badge" id="wishlist-count" aria-hidden="true">0</span>
+                
+                <div class="nav-actions">
+                    <a href="tel:+254115594826" class="nav-phone">
+                        <i class="fas fa-phone"></i>
+                        <span>0115 594 826</span>
+                    </a>
+                    <button class="cart-btn" id="cart-toggle" aria-label="Open cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge" id="cart-count">0</span>
                     </button>
-                    <button class="icon-btn cart-toggle" aria-label="Open cart" title="Cart" data-open-cart>
-                        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-                        <span class="badge" id="cart-count" aria-hidden="true">0</span>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
-                    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-                        <i class="fa-solid fa-moon" aria-hidden="true"></i>
-                    </button>
-                    <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    </div>
                 </div>
             </nav>
         </div>
     </header>
 
-    
-
     <!-- Hero Section -->
-    <section id="home" class="hero" style="position:relative;">
+    <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Your Campus Essentials & Tech Services Hub</h1>
-                <p class="hero-description">Quality products and professional technology solutions designed for students and professionals. Get everything you need in one place.</p>
-                <a href="#contact" class="btn btn-primary">Get Started</a>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="hero-badge">🎓 Trusted by 500+ Students</span>
+                    <h1 class="hero-title">Your One-Stop Shop for <span class="highlight">Campus Essentials</span></h1>
+                    <p class="hero-description">Quality student supplies, tech accessories, and professional services. Fast delivery across Kenya with M-Pesa payment.</p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-primary btn-lg">
+                            <i class="fas fa-shopping-bag"></i> Shop Now
+                        </a>
+                        <a href="https://wa.me/254115594826" class="btn btn-outline btn-lg" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="hero-trust">
+                        <div class="trust-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Fast Delivery</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-undo"></i>
+                            <span>Easy Returns</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=500&fit=crop" alt="Student studying with supplies" loading="eager">
+                </div>
             </div>
         </div>
-        <div id="hero-letterglitch" class="letterglitch" aria-hidden="true"></div>
-        <div id="hero-products-bg" class="distortion-container" aria-hidden="true"></div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Products</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24hr</span>
+                    <span class="stat-label">Delivery Time</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Customer Rating</span>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="services">
-        <div id="letterglitch" class="letterglitch" aria-hidden="true"></div>
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Comprehensive solutions tailored to your needs</p>
+            <div class="section-header">
+                <span class="section-tag">What We Offer</span>
+                <h2 class="section-title">Professional Services</h2>
+                <p class="section-subtitle">Expert tech solutions tailored for students and businesses</p>
+            </div>
             
             <div class="services-grid">
-                <!-- Service Card 1 -->
-                <figure class="tilted-card-figure">
-                  <div class="tilted-card-inner">
-                    <div class="service-card card-spotlight">
-                        <div class="service-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <h3 class="service-title">Tech Support</h3>
-                        <p class="service-description">Expert technical assistance for all your devices and software needs. From troubleshooting to setup, we've got you covered.</p>
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
                     </div>
-                  </div>
-                  <figcaption class="tilted-card-caption">Tech Support</figcaption>
-                </figure>
+                    <h3>Computer Repair</h3>
+                    <p>Expert diagnosis and repair for laptops and desktops. Same-day service available.</p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </article>
                 
-                <!-- Service Card 2 -->
-                <figure class="tilted-card-figure">
-                  <div class="tilted-card-inner">
-                    <div class="service-card card-spotlight">
-                        <div class="service-icon">
-                            <i class="fas fa-shopping-bag"></i>
-                        </div>
-                        <h3 class="service-title">Campus Essentials</h3>
-                        <p class="service-description">Everything you need for campus life. Quality products delivered right to your doorstep at competitive prices.</p>
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-print"></i>
                     </div>
-                  </div>
-                  <figcaption class="tilted-card-caption">Campus Essentials</figcaption>
-                </figure>
+                    <h3>Printing & Binding</h3>
+                    <p>High-quality printing, spiral binding, and lamination at student-friendly prices.</p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </article>
                 
-                <!-- Service Card 3 -->
-                <figure class="tilted-card-figure">
-                  <div class="tilted-card-inner">
-                    <div class="service-card card-spotlight">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="service-title">Device Repair</h3>
-                        <p class="service-description">Professional repair services for laptops, phones, and tablets. Fast turnaround with quality guaranteed.</p>
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                  </div>
-                  <figcaption class="tilted-card-caption">Device Repair</figcaption>
-                </figure>
+                    <h3>Software Solutions</h3>
+                    <p>OS installation, software setup, virus removal, and data recovery services.</p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </article>
                 
-                <!-- Service Card 4 -->
-                <figure class="tilted-card-figure">
-                  <div class="tilted-card-inner">
-                    <div class="service-card card-spotlight">
-                        <div class="service-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3 class="service-title">Student Packages</h3>
-                        <p class="service-description">Special bundle deals for students including stationery, tech accessories, and essential supplies.</p>
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-screen"></i>
                     </div>
-                  </div>
-                  <figcaption class="tilted-card-caption">Student Packages</figcaption>
-                </figure>
-                
-                <!-- Service Card 5 -->
-                <figure class="tilted-card-figure">
-                  <div class="tilted-card-inner">
-                    <div class="service-card card-spotlight">
-                        <div class="service-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h3 class="service-title">24/7 Support</h3>
-                        <p class="service-description">Round-the-clock customer support to answer your questions and resolve issues promptly.</p>
-                    </div>
-                  </div>
-                  <figcaption class="tilted-card-caption">24/7 Support</figcaption>
-                </figure>
-                
-                <!-- Service Card 6 -->
-                <figure class="tilted-card-figure">
-                  <div class="tilted-card-inner">
-                    <div class="service-card card-spotlight">
-                        <div class="service-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <h3 class="service-title">Fast Delivery</h3>
-                        <p class="service-description">Quick and reliable delivery service across campus and surrounding areas. Same-day delivery available.</p>
-                    </div>
-                  </div>
-                  <figcaption class="tilted-card-caption">Fast Delivery</figcaption>
-                </figure>
+                    <h3>Phone Accessories</h3>
+                    <p>Original chargers, earphones, cases, and screen protectors for all phone brands.</p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
     <section id="products" class="products">
-        <div class="products-bg distortion-container" aria-hidden="true"></div>
-        
         <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <p class="section-subtitle">Premium quality at affordable prices</p>
+            <div class="section-header">
+                <span class="section-tag">Shop Now</span>
+                <h2 class="section-title">Student Essentials</h2>
+                <p class="section-subtitle">Everything you need for campus life, delivered to your door</p>
+            </div>
             
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="stationery">📚 Stationery</button>
+                <button class="filter-btn" data-filter="tech">💻 Tech</button>
+                <button class="filter-btn" data-filter="workwear">👔 Workwear</button>
+                <button class="filter-btn" data-filter="accessories">🎒 Accessories</button>
+            </div>
+
             <div class="products-grid">
-                <!-- Product Card 1 -->
-                <div class="pc-card-wrapper">
-                  <section class="pc-card">
-                    <div class="pc-inside">
-                      <div class="pc-avatar-content">
-                        <img class="avatar" src="./assets/images/product-1.jpg" alt="Engineering Set" loading="lazy" />
-                      </div>
-                      <div class="pc-content">
-                        <div class="pc-details">
-                          <h3>Engineering Set</h3>
-                          <p>Complete sets for every drawing, every detail.</p>
-                          <div class="product-footer" style="justify-content:center; gap:12px; margin-top:12px; position: relative;">
-                            <button class="pc-wishlist-btn" aria-label="Add to wishlist" title="Add to wishlist" data-add-to-wishlist data-id="p1" data-name="Engineering Set" data-image="./assets/images/product-1.jpg">
-                              <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                <!-- Product 1 -->
+                <article class="product-card" data-category="stationery">
+                    <div class="product-image">
+                        <span class="product-badge sale">-15%</span>
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop" alt="Engineering Drawing Set" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p1" data-name="Engineering Drawing Set" data-price="850" data-image="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
                             </button>
-                            <span class="product-price">KSh 850 <small style="text-decoration: line-through; opacity: 0.6;">1000</small></span>
-                            <a href="#" data-add-to-cart data-id="p1" data-name="Engineering Set" data-price="850" data-image="./assets/images/product-1.jpg" class="btn btn-secondary">Add to Cart</a>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </section>
-                </div>
-                
-                <!-- Product Card 2 -->
-                <div class="pc-card-wrapper">
-                  <section class="pc-card">
-                    <div class="pc-inside">
-                      <div class="pc-avatar-content">
-                        <img class="avatar" src="./assets/images/product-2.jpg" alt="FX-82MS Scientific Calculator" loading="lazy" />
-                      </div>
-                      <div class="pc-content">
-                        <div class="pc-details">
-                          <h3>FX-82MS Scientific Calculator</h3>
-                          <p>240 functions, 2-line display.</p>
-                          <div class="product-footer" style="justify-content:center; gap:12px; margin-top:12px; position: relative;">
-                            <button class="pc-wishlist-btn" aria-label="Add to wishlist" title="Add to wishlist" data-add-to-wishlist data-id="p2" data-name="FX-82MS Scientific Calculator" data-image="./assets/images/product-2.jpg">
-                              <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                    <div class="product-info">
+                        <span class="product-category">Stationery</span>
+                        <h3>Engineering Drawing Set</h3>
+                        <p>Complete 15-piece mathematical instruments</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 850</span>
+                                <span class="price-old">KSh 1,000</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.8
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="product-card" data-category="tech">
+                    <div class="product-image">
+                        <span class="product-badge bestseller">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=400&fit=crop" alt="Scientific Calculator" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p2" data-name="Casio FX-82MS Calculator" data-price="750" data-image="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
                             </button>
-                            <span class="product-price">KSh 750 <small style="text-decoration: line-through; opacity: 0.6;">800</small></span>
-                            <a href="#" data-add-to-cart data-id="p2" data-name="FX-82MS Scientific Calculator" data-price="750" data-image="./assets/images/product-2.jpg" class="btn btn-secondary">Add to Cart</a>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </section>
-                </div>
-                
-                <!-- Product Card 3 -->
-                <div class="pc-card-wrapper">
-                  <section class="pc-card">
-                    <div class="pc-inside">
-                      <div class="pc-avatar-content">
-                        <img class="avatar" src="./assets/images/product-3.jpg" alt="FX-991ES Plus Scientific Calculator" loading="lazy" />
-                      </div>
-                      <div class="pc-content">
-                        <div class="pc-details">
-                          <h3>FX-991ES Plus Scientific Calculator</h3>
-                          <p>417 functions with natural textbook display.</p>
-                          <div class="product-footer" style="justify-content:center; gap:12px; margin-top:12px; position: relative;">
-                            <button class="pc-wishlist-btn" aria-label="Add to wishlist" title="Add to wishlist" data-add-to-wishlist data-id="p3" data-name="FX-991ES Plus Scientific Calculator" data-image="./assets/images/product-3.jpg">
-                              <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                    <div class="product-info">
+                        <span class="product-category">Tech</span>
+                        <h3>Casio FX-82MS Calculator</h3>
+                        <p>240 functions, 2-line display</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 750</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.9
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="product-card" data-category="tech">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&h=400&fit=crop" alt="Oraimo Earbuds" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p3" data-name="Oraimo FreePods 3" data-price="1500" data-image="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
                             </button>
-                            <span class="product-price">KSh 1,900 <small style="text-decoration: line-through; opacity: 0.6;">2000</small></span>
-                            <a href="#" data-add-to-cart data-id="p3" data-name="FX-991ES Plus Scientific Calculator" data-price="1900" data-image="./assets/images/product-3.jpg" class="btn btn-secondary">Add to Cart</a>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </section>
-                </div>
-                
-                <!-- Product Card 4 -->
-                <div class="pc-card-wrapper">
-                  <section class="pc-card">
-                    <div class="pc-inside">
-                      <div class="pc-avatar-content">
-                        <img class="avatar" src="./assets/images/product-4.jpg" alt="Oraimo Products" loading="lazy" />
-                      </div>
-                      <div class="pc-content">
-                        <div class="pc-details">
-                          <h3>Oraimo × M Solutions</h3>
-                          <p>Exclusive tech accessories</p>
-                          <div class="product-footer" style="justify-content:center; gap:12px; margin-top:12px; position: relative;">
-                            <button class="pc-wishlist-btn" aria-label="Add to wishlist" title="Add to wishlist" data-add-to-wishlist data-id="p4" data-name="Oraimo × M Solutions" data-image="./assets/images/product-4.jpg">
-                              <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                    <div class="product-info">
+                        <span class="product-category">Tech</span>
+                        <h3>Oraimo FreePods 3</h3>
+                        <p>Wireless earbuds with 28hr battery</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 1,500</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.7
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="product-card" data-category="workwear">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=400&fit=crop" alt="Lab Coat" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p4" data-name="White Lab Coat" data-price="1250" data-image="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
                             </button>
-                            <span class="product-price" style="font-size: 1rem;">Exclusive Deals</span>
-                            <a href="#" data-add-to-cart data-id="p4" data-name="Oraimo × M Solutions" data-price="0" data-image="./assets/images/product-4.jpg" class="btn btn-secondary">Add to Cart</a>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </section>
-                </div>
-                
-                <!-- Product Card 5 -->
-                <div class="pc-card-wrapper">
-                  <section class="pc-card">
-                    <div class="pc-inside">
-                      <div class="pc-avatar-content">
-                        <img class="avatar" src="./assets/images/product-5.jpg" alt="Overalls" loading="lazy" />
-                      </div>
-                      <div class="pc-content">
-                        <div class="pc-details">
-                          <h3>Overalls</h3>
-                          <p>Comfortable and durable workwear.</p>
-                          <div class="product-footer" style="justify-content:center; gap:12px; margin-top:12px; position: relative;">
-                            <button class="pc-wishlist-btn" aria-label="Add to wishlist" title="Add to wishlist" data-add-to-wishlist data-id="p5" data-name="Overalls" data-image="./assets/images/product-5.jpg">
-                              <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                    <div class="product-info">
+                        <span class="product-category">Workwear</span>
+                        <h3>White Lab Coat</h3>
+                        <p>Premium cotton, all sizes available</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 1,250</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.8
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 5 -->
+                <article class="product-card" data-category="stationery">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=400&fit=crop" alt="Notebooks" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p5" data-name="A4 Hardcover Notebook" data-price="150" data-image="https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
                             </button>
-                            <span class="product-price">KSh 1,250 <small style="text-decoration: line-through; opacity: 0.6;">1500</small></span>
-                            <a href="#" data-add-to-cart data-id="p5" data-name="Overalls" data-price="1250" data-image="./assets/images/product-5.jpg" class="btn btn-secondary">Add to Cart</a>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </section>
-                </div>
+                    <div class="product-info">
+                        <span class="product-category">Stationery</span>
+                        <h3>A4 Hardcover Notebook</h3>
+                        <p>200 pages, ruled, quality paper</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 150</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.6
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 6 -->
+                <article class="product-card" data-category="tech">
+                    <div class="product-image">
+                        <span class="product-badge new">New</span>
+                        <img src="https://images.unsplash.com/photo-1564466809058-bf4114d55352?w=400&h=400&fit=crop" alt="Calculator" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p6" data-name="Casio FX-991ES Plus" data-price="1900" data-image="https://images.unsplash.com/photo-1564466809058-bf4114d55352?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Tech</span>
+                        <h3>Casio FX-991ES Plus</h3>
+                        <p>417 functions, natural display</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 1,900</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 5.0
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 7 -->
+                <article class="product-card" data-category="tech">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1618410320928-25228d811631?w=400&h=400&fit=crop" alt="USB Flash Drive" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p7" data-name="32GB USB Flash Drive" data-price="450" data-image="https://images.unsplash.com/photo-1618410320928-25228d811631?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Tech</span>
+                        <h3>32GB USB Flash Drive</h3>
+                        <p>USB 3.0, high-speed transfer</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 450</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.5
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 8 -->
+                <article class="product-card" data-category="accessories">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=400&h=400&fit=crop" alt="Laptop Bag" loading="lazy">
+                        <div class="product-actions">
+                            <button class="action-btn" data-add-to-cart data-id="p8" data-name="Laptop Backpack 15.6" data-price="1800" data-image="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=400&h=400&fit=crop">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Accessories</span>
+                        <h3>Laptop Backpack 15.6"</h3>
+                        <p>Waterproof, USB charging port</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-current">KSh 1,800</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i> 4.7
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="products-cta">
+                <p>Can't find what you're looking for?</p>
+                <a href="https://wa.me/254115594826?text=Hi, I'm looking for a product..." class="btn btn-primary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Request Custom Order
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Join 500+ satisfied students and professionals</p>
+            </div>
+            
+            <div class="reviews-grid">
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Fast delivery and genuine products! Got my calculator the same day I ordered. Highly recommend M Solutions for all campus needs."</p>
+                    <div class="review-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <strong>James Mwangi</strong>
+                            <span>Engineering Student, UoN</span>
+                        </div>
+                    </div>
+                </article>
                 
-                <!-- Product Card 6 -->
-                <div class="pc-card-wrapper">
-                  <section class="pc-card">
-                    <div class="pc-inside">
-                      <div class="pc-avatar-content">
-                        <img class="avatar" src="./assets/images/product-6.jpg" alt="View Full Catalog" loading="lazy" />
-                      </div>
-                      <div class="pc-content">
-                        <div class="pc-details">
-                          <h3>Browse Full Catalog</h3>
-                          <p>Explore the full range</p>
-                          <div class="product-footer" style="justify-content:center; gap:12px; margin-top:12px;">
-                            <span class="product-price" style="font-size: 1rem;">View All Products</span>
-                            
-                          </div>
-                        </div>
-                      </div>
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                  </section>
+                    <p class="review-text">"The lab coat quality is amazing! Perfect fit and the price was very fair. Will definitely order more supplies from here."</p>
+                    <div class="review-author">
+                        <div class="author-avatar">SW</div>
+                        <div class="author-info">
+                            <strong>Sarah Wanjiku</strong>
+                            <span>Medical Student, KU</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"They fixed my laptop in just 2 hours! Professional service and very affordable. M Solutions is now my go-to for tech support."</p>
+                    <div class="review-author">
+                        <div class="author-avatar">PO</div>
+                        <div class="author-info">
+                            <strong>Peter Ochieng</strong>
+                            <span>IT Professional</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Order now and get free delivery on orders over KSh 2,000</p>
+                <div class="cta-buttons">
+                    <a href="#products" class="btn btn-white btn-lg">Browse Products</a>
+                    <a href="https://wa.me/254115594826" class="btn btn-outline-white btn-lg" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat with Us
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact / Footer Section -->
+    <!-- Footer -->
     <footer id="contact" class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">M Solutions</h3>
-                    <p class="footer-description">Your trusted partner for campus essentials and professional tech services.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="./assets/images/logo-icon.svg" alt="M Solutions" class="logo-img" width="40" height="40">
+                        <span class="logo-text">M Solutions</span>
+                    </a>
+                    <p>Your trusted partner for campus essentials and professional tech services in Kenya.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/254115594826" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3 class="footer-title">Contact Us</h3>
-                    <ul class="footer-list">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:msolutions.ac.ke@gmail.com">msolutions.ac.ke@gmail.com</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+254115594826">+254 115 594 826</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> Kennedy Muritu | M Solutions</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <ul class="footer-list">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#products">Products</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h3 class="footer-title">Business Hours</h3>
-                    <ul class="footer-list">
-                        <li>Monday - Friday: 9AM - 6PM</li>
-                        <li>Saturday: 10AM - 4PM</li>
-                        <li>Sunday: Closed</li>
+                <div class="footer-links">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#products">Stationery</a></li>
+                        <li><a href="#products">Tech & Electronics</a></li>
+                        <li><a href="#products">Workwear</a></li>
+                        <li><a href="#products">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:msolutions.ac.ke@gmail.com">msolutions.ac.ke@gmail.com</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+254115594826">+254 115 594 826</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nairobi, Kenya</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Sat: 9AM - 6PM</span>
+                        </li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
+                <div class="footer-payment">
+                    <span>We Accept:</span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/200px-M-PESA_LOGO-01.svg.png" alt="M-Pesa" height="24">
+                    <span class="payment-text">Cash on Delivery</span>
+                </div>
                 <p>&copy; 2025 M Solutions. All rights reserved.</p>
+                <p class="credit">Designed by <a href="https://muritukennedy.vercel.app/" target="_blank" rel="noopener">Kennedy Muritu</a></p>
             </div>
         </div>
     </footer>
 
-    
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-overlay" id="cart-overlay"></div>
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+                <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <div class="cart-empty">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Your cart is empty</p>
+                    <a href="#products" class="btn btn-primary btn-sm" id="cart-shop-btn">Start Shopping</a>
+                </div>
+            </div>
+            <div class="cart-footer" id="cart-footer" style="display: none;">
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">KSh 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span id="cart-delivery">Free</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="cart-total">KSh 0</span>
+                    </div>
+                </div>
+                <div class="checkout-form">
+                    <input type="text" id="checkout-name" placeholder="Your Name *" required>
+                    <input type="tel" id="checkout-phone" placeholder="Phone Number (07...) *" required>
+                    <select id="checkout-payment">
+                        <option value="M-PESA">M-Pesa (Pay on Delivery)</option>
+                        <option value="COD">Cash on Delivery</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-full btn-lg" id="checkout-btn">
+                    <i class="fab fa-whatsapp"></i> Complete Order via WhatsApp
+                </button>
+                <p class="checkout-note">You'll be redirected to WhatsApp to confirm your order</p>
+            </div>
+        </div>
+    </div>
 
-    <!-- JavaScript -->
-    <script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
-    
-    <script src="./Ballpit.js" defer></script>
-    <script src="./GridDistortion.js" defer></script>
-    <script src="./LetterGlitch.js" defer></script>
-    <script src="./TiltedCard.js" defer></script>
-    <script src="./ProfileCard.js" defer></script>
-    <script src="./ClickSpark.js" defer></script>
-    <script src="./cart.js" defer></script>
-    
-    <script src="script.js" defer></script>
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/254115594826?text=Hi, I'm interested in your products..." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us</span>
+    </a>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
 </html>

@@ -83,37 +83,131 @@
         const wbadge=document.getElementById('wishlist-count'); if(wbadge){ wbadge.textContent=String(store.length); }
       }catch{}
     }
-    if(e.target.id==='cart-close'){ closeCart(); }
-    if(e.target.id==='cart-checkout'){ if(isDisabled()){ e.preventDefault(); return; } checkout(); }
-    // Disable any non-navbar open triggers
+    // Close button
+    if(e.target.id==='cart-close' || e.target.closest('#cart-close')){ 
+      e.preventDefault();
+      closeCart(); 
+    }
+    // Checkout button
+    if(e.target.id==='cart-checkout' || e.target.closest('#cart-checkout')){ 
+      e.preventDefault();
+      if(isDisabled()) return; 
+      checkout(); 
+    }
   });
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeCart(); }});
   modal.addEventListener('click', (e)=>{ if(e.target===modal){ closeCart(); }});
+  
+  // Also attach direct event listeners to buttons after modal is created
+  const closeBtn = panel.querySelector('#cart-close');
+  const checkoutBtn = panel.querySelector('#cart-checkout');
+  const checkoutForm = panel.querySelector('#checkout-form');
+  
+  if(closeBtn) closeBtn.addEventListener('click', (e) => { e.preventDefault(); closeCart(); });
+  if(checkoutBtn) checkoutBtn.addEventListener('click', (e) => { 
+    e.preventDefault(); 
+    e.stopPropagation();
+    console.log('Checkout button clicked');
+    if(!isDisabled()) checkout(); 
+  });
+  // Prevent form submission
+  if(checkoutForm) checkoutForm.addEventListener('submit', (e) => { e.preventDefault(); });
 
   async function checkout(){
+    console.log('Checkout function called');
     if(isDisabled()) return;
-    const items = readCart(); if(!items.length){ alert('Cart is empty'); return; }
-    const name = (document.getElementById('co-name')||{}).value || '';
-    const phone = (document.getElementById('co-phone')||{}).value || '';
-    const address = (document.getElementById('co-address')||{}).value || '';
+    const items = readCart(); 
+    if(!items.length){ 
+      showToast('Your cart is empty', 'error'); 
+      return; 
+    }
+    const name = (document.getElementById('co-name')||{}).value?.trim() || '';
+    const phone = (document.getElementById('co-phone')||{}).value?.trim() || '';
+    const address = (document.getElementById('co-address')||{}).value?.trim() || '';
     const paymentMode = (document.getElementById('co-payment')||{}).value || 'M-PESA';
-    if(!name || !phone){ alert('Please fill name and phone'); return; }
+    
+    // Validation
+    if(!name){ 
+      document.getElementById('co-name')?.classList.add('invalid');
+      showToast('Please enter your name', 'error'); 
+      return; 
+    }
+    if(!phone || phone.length < 10){ 
+      document.getElementById('co-phone')?.classList.add('invalid');
+      showToast('Please enter a valid phone number', 'error'); 
+      return; 
+    }
+    
+    // Remove invalid states
+    document.getElementById('co-name')?.classList.remove('invalid');
+    document.getElementById('co-phone')?.classList.remove('invalid');
+    
     const total = items.reduce((s,i)=> s + i.price*i.quantity, 0);
-    const order = {
-      customer: { name, phone, address },
-      items: items.map(i=> ({ productId: i.productId, name: i.name, quantity: i.quantity, price: i.price })),
-      total, paymentMode
-    };
+    
+    // Format order details for WhatsApp
+    const orderDetails = items.map(i => `• ${i.name} x${i.quantity} = KSh ${i.price * i.quantity}`).join('\n');
+    const whatsappMessage = `🛒 *New Order from M Solutions Website*\n\n` +
+      `*Customer:* ${name}\n` +
+      `*Phone:* ${phone}\n` +
+      `*Address:* ${address || 'Not provided'}\n` +
+      `*Payment:* ${paymentMode}\n\n` +
+      `*Order Items:*\n${orderDetails}\n\n` +
+      `*Total: KSh ${total.toLocaleString()}*`;
+    
+    const whatsappNumber = '254115594826';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    // Try API first, fallback to WhatsApp
     try {
-      const res = await fetch('/api/orders/create', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(order) });
-      const data = await res.json();
+      const res = await fetch('/api/orders/create', { 
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body: JSON.stringify({
+          customer: { name, phone, address },
+          items: items.map(i=> ({ productId: i.productId, name: i.name, quantity: i.quantity, price: i.price })),
+          total, 
+          paymentMode
+        })
+      });
+      
       if(res.ok){
-        alert(paymentMode==='M-PESA' ? 'STK push initiated. Complete on your phone.' : 'Order placed. Pay on delivery.');
-        writeCart([]); closeCart();
+        const data = await res.json();
+        showToast(paymentMode==='M-PESA' ? 'STK push sent! Check your phone.' : 'Order placed successfully!', 'success');
+        writeCart([]); 
+        syncBadge();
+        render();
+        setTimeout(closeCart, 1500);
       } else {
-        alert(data.message||'Checkout failed');
+        throw new Error('API failed');
       }
-    } catch(err){ alert('Network error'); }
+    } catch(err){ 
+      // Fallback to WhatsApp
+      showToast('Redirecting to WhatsApp...', 'success');
+      writeCart([]); 
+      syncBadge();
+      render();
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+        closeCart();
+      }, 500);
+    }
+  }
+  
+  // Toast notification helper
+  function showToast(message, type = 'info') {
+    const existing = document.querySelector('.cart-toast');
+    if(existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = `cart-toast cart-toast-${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
   }
 
   // Expose for manual open

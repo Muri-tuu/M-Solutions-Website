@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- M Solutions Icon - Square format for favicon/app icon -->
+  
+  <!-- Background -->
+  <rect width="48" height="48" rx="12" fill="#FF6B35"/>
+  
+  <!-- M Letter -->
+  <path d="M12 34V14L24 26L36 14V34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Small accent dot (shopping indicator) -->
+  <circle cx="38" cy="12" r="4" fill="white"/>
+</svg>

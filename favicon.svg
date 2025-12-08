@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- M Solutions Favicon - Optimized for small sizes -->
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#FF6B35"/>
+  
+  <!-- M Letter - Simplified for small size -->
+  <path d="M8 24V8L16 18L24 8V24" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
