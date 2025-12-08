@@ -1,13 +1,43 @@
-/* ================================
-   M SOLUTIONS - 2025 JavaScript
-   Clean, performant, conversion-focused
-   ================================ */
+/*
+================================================================================
+M SOLUTIONS - Main JavaScript
+================================================================================
+Author:  Kennedy Muritu (https://muritukennedy.vercel.app)
+Version: 2.0.0
+Updated: December 2025
+
+Description:
+Core JavaScript functionality for M Solutions e-commerce website.
+Handles UI interactions, cart management, and checkout flow.
+
+Features:
+1. Mobile Navigation - Hamburger menu toggle
+2. Smooth Scrolling - Anchor link navigation
+3. Active Nav Highlighting - Intersection Observer based
+4. Header Scroll Effect - Sticky header behavior
+5. Back to Top Button - Scroll-triggered visibility
+6. Product Filtering - Category-based filtering
+7. Shopping Cart - Add, remove, update quantities
+8. WhatsApp Checkout - Order via WhatsApp integration
+9. Toast Notifications - User feedback messages
+10. Scroll Animations - Fade-in effects on scroll
+11. Stats Counter - Animated number counting
+
+Dependencies:
+- None (Vanilla JavaScript ES6+)
+
+Browser Support:
+- Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
+================================================================================
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ================================
-    // MOBILE MENU
-    // ================================
+    /* =========================================================================
+       1. MOBILE MENU
+       - Toggle hamburger menu on mobile devices
+       - Auto-close when clicking navigation links
+       ========================================================================= */
     const mobileToggle = document.getElementById('mobile-toggle');
     const navMenu = document.getElementById('nav-menu');
     
@@ -24,9 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ================================
-    // SMOOTH SCROLL
-    // ================================
+    /* =========================================================================
+       2. SMOOTH SCROLL
+       - Smooth scrolling for anchor links
+       - Prevents default jump behavior
+       ========================================================================= */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const href = anchor.getAttribute('href');
@@ -40,9 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ================================
-    // ACTIVE NAV LINK ON SCROLL
-    // ================================
+    /* =========================================================================
+       3. ACTIVE NAV LINK ON SCROLL
+       - Uses Intersection Observer API for performance
+       - Highlights current section in navigation
+       ========================================================================= */
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     
@@ -67,9 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     sections.forEach(section => observer.observe(section));
 
-    // ================================
-    // HEADER SCROLL EFFECT
-    // ================================
+    /* =========================================================================
+       4. HEADER SCROLL EFFECT
+       - Adds 'scrolled' class when page is scrolled
+       - Used for header background/shadow changes
+       ========================================================================= */
     const header = document.getElementById('header');
     let lastScroll = 0;
     
@@ -85,9 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     }, { passive: true });
 
-    // ================================
-    // BACK TO TOP
-    // ================================
+    /* =========================================================================
+       5. BACK TO TOP BUTTON
+       - Shows button when scrolled past 500px
+       - Smooth scroll to top on click
+       ========================================================================= */
     const backToTop = document.getElementById('back-to-top');
     
     window.addEventListener('scroll', () => {
@@ -102,9 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ================================
-    // PRODUCT FILTER
-    // ================================
+    /* =========================================================================
+       6. PRODUCT FILTER
+       - Filter products by category
+       - Uses data-filter and data-category attributes
+       ========================================================================= */
     const filterBtns = document.querySelectorAll('.filter-btn');
     const productCards = document.querySelectorAll('.product-card');
 
@@ -128,9 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ================================
-    // CART FUNCTIONALITY
-    // ================================
+    /* =========================================================================
+       7. CART FUNCTIONALITY
+       - Full shopping cart with localStorage persistence
+       - Add, remove, update quantities
+       - WhatsApp checkout integration
+       ========================================================================= */
     const CART_KEY = 'msolutions_cart_2025';
     
     // Elements
@@ -401,9 +444,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     updateBadge();
 
-    // ================================
-    // ANIMATIONS ON SCROLL
-    // ================================
+    /* =========================================================================
+       8. SCROLL ANIMATIONS
+       - Fade-in-up animation on scroll
+       - Uses Intersection Observer for performance
+       ========================================================================= */
     const animateElements = document.querySelectorAll('.service-card, .product-card, .review-card');
     
     const animateObserver = new IntersectionObserver((entries) => {
@@ -438,9 +483,11 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // ================================
-    // STATS COUNTER ANIMATION
-    // ================================
+    /* =========================================================================
+       9. STATS COUNTER ANIMATION
+       - Animated counting effect for statistics
+       - Triggers when stats section is visible
+       ========================================================================= */
     const statNumbers = document.querySelectorAll('.stat-number');
     
     const statsObserver = new IntersectionObserver((entries) => {

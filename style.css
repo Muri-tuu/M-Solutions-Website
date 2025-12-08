@@ -1,11 +1,57 @@
-/* ================================
-   M SOLUTIONS - 2025 Premium Design
-   Based on top e-commerce UX trends
-   ================================ */
+/*
+================================================================================
+M SOLUTIONS - Premium E-commerce Stylesheet
+================================================================================
+Author:  Kennedy Muritu (https://muritukennedy.vercel.app)
+Version: 2.0.0
+Updated: December 2025
 
-/* CSS Variables */
+Design Philosophy:
+- Clean, minimal aesthetic inspired by top 2025 e-commerce sites
+- Mobile-first responsive approach
+- Generous whitespace for premium feel
+- Subtle animations for micro-interactions
+- High contrast for accessibility
+
+Color Palette:
+- Primary: #FF6B35 (Orange - energy, action, warmth)
+- Secondary: #1a1a2e (Dark blue - trust, professionalism)
+- Neutrals: Gray scale from #fafafa to #09090b
+
+Typography:
+- Font: Inter (Google Fonts) - Modern, highly readable
+- Scale: 0.75rem to 3rem (modular scale)
+
+Sections:
+1. CSS Variables (Design Tokens)
+2. Reset & Base Styles
+3. Layout & Container
+4. Buttons
+5. Header & Navigation
+6. Hero Section
+7. Stats Bar
+8. Services Section
+9. Products Section
+10. Reviews Section
+11. CTA Section
+12. Footer
+13. Cart Modal
+14. Utilities (WhatsApp, Back to Top, Toast)
+15. Responsive Breakpoints
+================================================================================
+*/
+
+/* =============================================================================
+   1. CSS VARIABLES (DESIGN TOKENS)
+   - Centralized design values for consistency
+   - Easy theming and maintenance
+   ============================================================================= */
 :root {
-    /* Colors */
+    /* 
+     * Brand Colors
+     * Primary: Orange for CTAs and highlights
+     * Secondary: Dark blue for headers and text
+     */
     --primary: #FF6B35;
     --primary-dark: #e55a2b;
     --primary-light: #ff8c5a;
