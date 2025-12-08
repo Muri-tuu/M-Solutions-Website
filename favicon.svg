@@ -6,4 +6,7 @@
   
   <!-- M Letter - Simplified for small size -->
   <path d="M8 24V8L16 18L24 8V24" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Star accent -->
+  <path d="M26 4l1 2 2.3.3-1.7 1.7.4 2.3-2-1-2 1 .4-2.3-1.7-1.7 2.3-.3z" fill="white"/>
 </svg>

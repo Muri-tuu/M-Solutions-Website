@@ -193,44 +193,309 @@ Tech Stack:
             </div>
             
             <div class="services-grid">
-                <article class="service-card">
+                <!-- Computer Repair Service -->
+                <article class="service-card" data-service="repair">
                     <div class="service-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h3>Computer Repair</h3>
                     <p>Expert diagnosis and repair for laptops and desktops. Same-day service available.</p>
-                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Hardware diagnostics</li>
+                        <li><i class="fas fa-check"></i> Screen replacement</li>
+                        <li><i class="fas fa-check"></i> Keyboard & battery</li>
+                    </ul>
+                    <div class="service-price">From <strong>KSh 500</strong></div>
+                    <button class="btn btn-primary btn-full" onclick="openServiceModal('repair')">
+                        <i class="fas fa-calendar-check"></i> Book Repair
+                    </button>
                 </article>
                 
-                <article class="service-card">
+                <!-- Printing & Binding Service -->
+                <article class="service-card" data-service="printing">
                     <div class="service-icon">
                         <i class="fas fa-print"></i>
                     </div>
                     <h3>Printing & Binding</h3>
                     <p>High-quality printing, spiral binding, and lamination at student-friendly prices.</p>
-                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> B&W from KSh 5/page</li>
+                        <li><i class="fas fa-check"></i> Color from KSh 15/page</li>
+                        <li><i class="fas fa-check"></i> Binding from KSh 100</li>
+                    </ul>
+                    <div class="service-price">Starting <strong>KSh 5</strong>/page</div>
+                    <button class="btn btn-primary btn-full" onclick="openServiceModal('printing')">
+                        <i class="fas fa-upload"></i> Upload & Print
+                    </button>
                 </article>
                 
-                <article class="service-card">
+                <!-- Software Solutions Service -->
+                <article class="service-card" data-service="software">
                     <div class="service-icon">
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Software Solutions</h3>
                     <p>OS installation, software setup, virus removal, and data recovery services.</p>
-                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Windows/Linux install</li>
+                        <li><i class="fas fa-check"></i> Virus removal</li>
+                        <li><i class="fas fa-check"></i> Data recovery</li>
+                    </ul>
+                    <div class="service-price">From <strong>KSh 1,000</strong></div>
+                    <button class="btn btn-primary btn-full" onclick="openServiceModal('software')">
+                        <i class="fas fa-calendar-check"></i> Book Service
+                    </button>
                 </article>
                 
-                <article class="service-card">
+                <!-- Phone Accessories Service -->
+                <article class="service-card" data-service="accessories">
                     <div class="service-icon">
                         <i class="fas fa-mobile-screen"></i>
                     </div>
                     <h3>Phone Accessories</h3>
                     <p>Original chargers, earphones, cases, and screen protectors for all phone brands.</p>
-                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Original accessories</li>
+                        <li><i class="fas fa-check"></i> All phone brands</li>
+                        <li><i class="fas fa-check"></i> Warranty included</li>
+                    </ul>
+                    <div class="service-price">From <strong>KSh 200</strong></div>
+                    <a href="#products" class="btn btn-primary btn-full">
+                        <i class="fas fa-shopping-bag"></i> Browse Products
+                    </a>
                 </article>
             </div>
         </div>
     </section>
+
+    <!-- Service Booking Modals -->
+    <!-- Computer Repair Modal -->
+    <div class="service-modal" id="repair-modal">
+        <div class="service-modal-overlay" onclick="closeServiceModal('repair')"></div>
+        <div class="service-modal-content">
+            <button class="modal-close" onclick="closeServiceModal('repair')">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon"><i class="fas fa-laptop-code"></i></div>
+                <h2>Computer Repair Service</h2>
+                <p>Get your device diagnosed and repaired by our experts</p>
+            </div>
+            <form class="service-form" id="repair-form">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="0712 345 678" required>
+                </div>
+                <div class="form-group">
+                    <label>Device Type *</label>
+                    <select name="device" required>
+                        <option value="">Select device type</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="desktop">Desktop PC</option>
+                        <option value="macbook">MacBook</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Issue Type *</label>
+                    <select name="issue" required>
+                        <option value="">Select issue</option>
+                        <option value="not-turning-on">Not turning on</option>
+                        <option value="slow-performance">Slow performance</option>
+                        <option value="screen-damage">Screen damage</option>
+                        <option value="keyboard-issue">Keyboard not working</option>
+                        <option value="battery-issue">Battery problem</option>
+                        <option value="overheating">Overheating</option>
+                        <option value="virus">Virus/Malware</option>
+                        <option value="other">Other issue</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Describe the Problem</label>
+                    <textarea name="description" rows="3" placeholder="Tell us more about the issue..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" name="date" min="">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg btn-full">
+                        <i class="fas fa-calendar-check"></i> Book Repair Appointment
+                    </button>
+                    <button type="button" class="btn btn-outline btn-lg btn-full" onclick="talkToEngineer('repair')">
+                        <i class="fab fa-whatsapp"></i> Talk to an Engineer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Printing Modal -->
+    <div class="service-modal" id="printing-modal">
+        <div class="service-modal-overlay" onclick="closeServiceModal('printing')"></div>
+        <div class="service-modal-content">
+            <button class="modal-close" onclick="closeServiceModal('printing')">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon"><i class="fas fa-print"></i></div>
+                <h2>Printing & Binding Service</h2>
+                <p>Upload your documents and we'll print them for you</p>
+            </div>
+            <form class="service-form" id="printing-form">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="0712 345 678" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Print Type *</label>
+                        <select name="printType" required>
+                            <option value="">Select type</option>
+                            <option value="bw">Black & White (KSh 5/page)</option>
+                            <option value="color">Color (KSh 15/page)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Pages *</label>
+                        <input type="number" name="pages" placeholder="e.g. 50" min="1" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Copies *</label>
+                        <input type="number" name="copies" placeholder="1" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Paper Size</label>
+                        <select name="paperSize">
+                            <option value="a4">A4 (Standard)</option>
+                            <option value="a3">A3</option>
+                            <option value="letter">Letter</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Binding Option</label>
+                    <select name="binding">
+                        <option value="none">No binding</option>
+                        <option value="spiral">Spiral Binding (+KSh 100)</option>
+                        <option value="tape">Tape Binding (+KSh 50)</option>
+                        <option value="hardcover">Hardcover (+KSh 500)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Upload Document (Optional)</label>
+                    <div class="file-upload">
+                        <input type="file" name="document" id="print-file" accept=".pdf,.doc,.docx,.ppt,.pptx">
+                        <label for="print-file" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload PDF, Word, or PowerPoint</span>
+                        </label>
+                    </div>
+                    <small>Or send via WhatsApp after booking</small>
+                </div>
+                <div class="form-group">
+                    <label>When do you need it?</label>
+                    <select name="urgency">
+                        <option value="standard">Standard (24 hours)</option>
+                        <option value="express">Express (Same day, +50%)</option>
+                        <option value="urgent">Urgent (2 hours, +100%)</option>
+                    </select>
+                </div>
+                <div class="price-estimate" id="print-estimate">
+                    <span>Estimated Price:</span>
+                    <strong>KSh 0</strong>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg btn-full">
+                        <i class="fas fa-paper-plane"></i> Submit Print Order
+                    </button>
+                    <button type="button" class="btn btn-outline btn-lg btn-full" onclick="talkToEngineer('printing')">
+                        <i class="fab fa-whatsapp"></i> Send Document via WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Software Solutions Modal -->
+    <div class="service-modal" id="software-modal">
+        <div class="service-modal-overlay" onclick="closeServiceModal('software')"></div>
+        <div class="service-modal-content">
+            <button class="modal-close" onclick="closeServiceModal('software')">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon"><i class="fas fa-code"></i></div>
+                <h2>Software Solutions</h2>
+                <p>Professional software installation and troubleshooting</p>
+            </div>
+            <form class="service-form" id="software-form">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="0712 345 678" required>
+                </div>
+                <div class="form-group">
+                    <label>Service Required *</label>
+                    <select name="service" required>
+                        <option value="">Select service</option>
+                        <option value="os-install">OS Installation (KSh 1,000)</option>
+                        <option value="dual-boot">Dual Boot Setup (KSh 1,500)</option>
+                        <option value="virus-removal">Virus Removal (KSh 800)</option>
+                        <option value="data-recovery">Data Recovery (From KSh 2,000)</option>
+                        <option value="software-install">Software Installation (KSh 500)</option>
+                        <option value="driver-update">Driver Updates (KSh 500)</option>
+                        <option value="optimization">PC Optimization (KSh 700)</option>
+                        <option value="backup">Data Backup (KSh 500)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Operating System</label>
+                    <select name="os">
+                        <option value="">Select OS (if applicable)</option>
+                        <option value="windows11">Windows 11</option>
+                        <option value="windows10">Windows 10</option>
+                        <option value="ubuntu">Ubuntu Linux</option>
+                        <option value="macos">macOS</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Additional Details</label>
+                    <textarea name="details" rows="3" placeholder="Any specific software you need installed, or describe your issue..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Service Location *</label>
+                    <select name="location" required>
+                        <option value="">Select option</option>
+                        <option value="dropoff">Drop off at our location</option>
+                        <option value="pickup">We pick up (+ KSh 200)</option>
+                        <option value="onsite">On-site service (+ KSh 500)</option>
+                        <option value="remote">Remote support (if applicable)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" name="date" min="">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg btn-full">
+                        <i class="fas fa-calendar-check"></i> Book Software Service
+                    </button>
+                    <button type="button" class="btn btn-outline btn-lg btn-full" onclick="talkToEngineer('software')">
+                        <i class="fab fa-whatsapp"></i> Consult an Engineer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Products Section -->
     <section id="products" class="products">
@@ -676,5 +941,19 @@ Tech Stack:
 
     <!-- Scripts -->
     <script src="script.js"></script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/69374e2b49fc3e1981765959/1jc00in47';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

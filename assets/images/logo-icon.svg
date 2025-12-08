@@ -7,6 +7,6 @@
   <!-- M Letter -->
   <path d="M12 34V14L24 26L36 14V34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   
-  <!-- Small accent dot (shopping indicator) -->
-  <circle cx="38" cy="12" r="4" fill="white"/>
+  <!-- Star accent -->
+  <path d="M38 6l1.5 3 3.5.5-2.5 2.5.5 3.5-3-1.5-3 1.5.5-3.5-2.5-2.5 3.5-.5z" fill="white"/>
 </svg>

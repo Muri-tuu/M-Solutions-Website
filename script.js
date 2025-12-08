@@ -523,4 +523,323 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log('M Solutions 2025 - Ready! 🚀');
+
+    /* =========================================================================
+       10. SERVICE BOOKING MODALS
+       - Open/close service booking modals
+       - Form submission via WhatsApp
+       - Price estimation for printing
+       ========================================================================= */
+    
+    // Set minimum date for date inputs to today
+    const dateInputs = document.querySelectorAll('input[type="date"]');
+    const today = new Date().toISOString().split('T')[0];
+    dateInputs.forEach(input => input.setAttribute('min', today));
+
+    // Printing price calculator
+    const printingForm = document.getElementById('printing-form');
+    if (printingForm) {
+        const priceInputs = printingForm.querySelectorAll('select[name="printType"], input[name="pages"], input[name="copies"], select[name="binding"], select[name="urgency"]');
+        priceInputs.forEach(input => {
+            input.addEventListener('change', calculatePrintPrice);
+            input.addEventListener('input', calculatePrintPrice);
+        });
+    }
+
+    function calculatePrintPrice() {
+        const form = document.getElementById('printing-form');
+        const printType = form.querySelector('select[name="printType"]').value;
+        const pages = parseInt(form.querySelector('input[name="pages"]').value) || 0;
+        const copies = parseInt(form.querySelector('input[name="copies"]').value) || 1;
+        const binding = form.querySelector('select[name="binding"]').value;
+        const urgency = form.querySelector('select[name="urgency"]').value;
+
+        let pricePerPage = printType === 'bw' ? 5 : printType === 'color' ? 15 : 0;
+        let bindingPrice = binding === 'spiral' ? 100 : binding === 'tape' ? 50 : binding === 'hardcover' ? 500 : 0;
+        let urgencyMultiplier = urgency === 'express' ? 1.5 : urgency === 'urgent' ? 2 : 1;
+
+        let total = ((pages * pricePerPage * copies) + (bindingPrice * copies)) * urgencyMultiplier;
+
+        const estimateEl = document.querySelector('#print-estimate strong');
+        if (estimateEl) {
+            estimateEl.textContent = `KSh ${Math.round(total).toLocaleString()}`;
+        }
+    }
+
+    // Form submissions
+    document.querySelectorAll('.service-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const serviceType = this.id.replace('-form', '');
+            submitServiceBooking(serviceType, formData);
+        });
+    });
+
+    function submitServiceBooking(serviceType, formData) {
+        const name = formData.get('name');
+        const phone = formData.get('phone');
+
+        if (!name || !phone) {
+            showToast('Please fill in all required fields', 'error');
+            return;
+        }
+
+        let message = '';
+
+        if (serviceType === 'repair') {
+            message = `🔧 *COMPUTER REPAIR BOOKING*\n\n` +
+                `👤 Name: ${name}\n` +
+                `📱 Phone: ${phone}\n` +
+                `💻 Device: ${formData.get('device')}\n` +
+                `⚠️ Issue: ${formData.get('issue')}\n` +
+                `📝 Details: ${formData.get('description') || 'N/A'}\n` +
+                `📅 Preferred Date: ${formData.get('date') || 'ASAP'}\n\n` +
+                `Please confirm my repair appointment. Thank you!`;
+        } else if (serviceType === 'printing') {
+            const printType = formData.get('printType') === 'bw' ? 'Black & White' : 'Color';
+            const binding = formData.get('binding');
+            const bindingText = binding === 'none' ? 'No binding' : binding.charAt(0).toUpperCase() + binding.slice(1) + ' binding';
+            
+            message = `🖨️ *PRINTING ORDER*\n\n` +
+                `👤 Name: ${name}\n` +
+                `📱 Phone: ${phone}\n` +
+                `📄 Type: ${printType}\n` +
+                `📑 Pages: ${formData.get('pages')}\n` +
+                `📋 Copies: ${formData.get('copies')}\n` +
+                `📐 Paper: ${formData.get('paperSize').toUpperCase()}\n` +
+                `📚 Binding: ${bindingText}\n` +
+                `⏰ Urgency: ${formData.get('urgency')}\n\n` +
+                `I will send the document shortly. Thank you!`;
+        } else if (serviceType === 'software') {
+            message = `💻 *SOFTWARE SERVICE BOOKING*\n\n` +
+                `👤 Name: ${name}\n` +
+                `📱 Phone: ${phone}\n` +
+                `🔧 Service: ${formData.get('service')}\n` +
+                `🖥️ OS: ${formData.get('os') || 'N/A'}\n` +
+                `📍 Location: ${formData.get('location')}\n` +
+                `📝 Details: ${formData.get('details') || 'N/A'}\n\n` +
+                `Please confirm my booking. Thank you!`;
+        }
+
+        const whatsappUrl = `https://wa.me/254115594826?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+
+        // Generate calendar event for repair and software bookings
+        if ((serviceType === 'repair' || serviceType === 'software') && formData.get('date')) {
+            setTimeout(() => {
+                if (confirm('Would you like to add this appointment to your calendar?')) {
+                    const eventDetails = {
+                        title: serviceType === 'repair' ? 'M Solutions - Computer Repair' : 'M Solutions - Software Service',
+                        date: formData.get('date'),
+                        description: message.replace(/\*/g, '').replace(/\n/g, '\\n'),
+                        location: 'M Solutions, Nairobi, Kenya'
+                    };
+                    showCalendarOptions(eventDetails);
+                }
+            }, 1000);
+        }
+
+        showToast('Redirecting to WhatsApp...', 'success');
+        closeServiceModal(serviceType);
+    }
 });
+
+/* =========================================================================
+   GLOBAL FUNCTIONS (Outside DOMContentLoaded)
+   - Service modal open/close
+   - Talk to engineer
+   ========================================================================= */
+
+function openServiceModal(service) {
+    const modal = document.getElementById(`${service}-modal`);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeServiceModal(service) {
+    const modal = document.getElementById(`${service}-modal`);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function talkToEngineer(service) {
+    let message = '';
+    
+    if (service === 'repair') {
+        message = `Hi, I need help with a computer repair issue. Can I speak to an engineer?`;
+    } else if (service === 'printing') {
+        message = `Hi, I have a printing job I'd like to discuss. Can you help me?`;
+    } else if (service === 'software') {
+        message = `Hi, I need software/technical support. Can I consult with an engineer?`;
+    }
+    
+    const whatsappUrl = `https://wa.me/254115594826?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.service-modal.active').forEach(modal => {
+            const service = modal.id.replace('-modal', '');
+            closeServiceModal(service);
+        });
+        // Also close calendar modal
+        const calendarModal = document.getElementById('calendar-modal');
+        if (calendarModal) calendarModal.classList.remove('active');
+    }
+});
+
+/* =========================================================================
+   11. CALENDAR INTEGRATION
+   - Generate Google Calendar links
+   - Generate ICS files for download
+   - Works with any calendar app
+   ========================================================================= */
+
+function showCalendarOptions(eventDetails) {
+    // Create calendar modal if it doesn't exist
+    let modal = document.getElementById('calendar-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'calendar-modal';
+        modal.className = 'service-modal';
+        modal.innerHTML = `
+            <div class="service-modal-overlay" onclick="closeCalendarModal()"></div>
+            <div class="service-modal-content" style="max-width: 400px;">
+                <button class="modal-close" onclick="closeCalendarModal()">&times;</button>
+                <div class="modal-header">
+                    <div class="modal-icon"><i class="fas fa-calendar-plus"></i></div>
+                    <h2>Add to Calendar</h2>
+                    <p>Choose your preferred calendar app</p>
+                </div>
+                <div class="calendar-options" style="padding: 1.5rem;">
+                    <button class="btn btn-outline btn-full" onclick="addToGoogleCalendar()" style="margin-bottom: 0.75rem;">
+                        <i class="fab fa-google" style="color: #4285f4;"></i> Google Calendar
+                    </button>
+                    <button class="btn btn-outline btn-full" onclick="addToOutlookCalendar()" style="margin-bottom: 0.75rem;">
+                        <i class="fab fa-microsoft" style="color: #0078d4;"></i> Outlook Calendar
+                    </button>
+                    <button class="btn btn-outline btn-full" onclick="downloadICSFile()" style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-download"></i> Download .ics File
+                    </button>
+                    <p style="text-align: center; font-size: 0.75rem; color: #666; margin-top: 1rem;">
+                        .ics files work with Apple Calendar, Outlook, and most calendar apps
+                    </p>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    // Store event details globally for calendar functions
+    window.pendingCalendarEvent = eventDetails;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCalendarModal() {
+    const modal = document.getElementById('calendar-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function addToGoogleCalendar() {
+    const event = window.pendingCalendarEvent;
+    if (!event) return;
+    
+    // Format date for Google Calendar (YYYYMMDD)
+    const dateStr = event.date.replace(/-/g, '');
+    const startDate = dateStr;
+    const endDate = dateStr; // Same day event
+    
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+        `&text=${encodeURIComponent(event.title)}` +
+        `&dates=${startDate}/${endDate}` +
+        `&details=${encodeURIComponent(event.description.replace(/\\n/g, '\n'))}` +
+        `&location=${encodeURIComponent(event.location)}` +
+        `&sf=true&output=xml`;
+    
+    window.open(googleUrl, '_blank');
+    closeCalendarModal();
+    showToast('Opening Google Calendar...', 'success');
+}
+
+function addToOutlookCalendar() {
+    const event = window.pendingCalendarEvent;
+    if (!event) return;
+    
+    // Format for Outlook web
+    const startDate = event.date + 'T09:00:00';
+    const endDate = event.date + 'T10:00:00';
+    
+    const outlookUrl = `https://outlook.live.com/calendar/0/deeplink/compose?` +
+        `subject=${encodeURIComponent(event.title)}` +
+        `&startdt=${startDate}` +
+        `&enddt=${endDate}` +
+        `&body=${encodeURIComponent(event.description.replace(/\\n/g, '\n'))}` +
+        `&location=${encodeURIComponent(event.location)}`;
+    
+    window.open(outlookUrl, '_blank');
+    closeCalendarModal();
+    showToast('Opening Outlook Calendar...', 'success');
+}
+
+function downloadICSFile() {
+    const event = window.pendingCalendarEvent;
+    if (!event) return;
+    
+    // Format date for ICS (YYYYMMDD)
+    const dateStr = event.date.replace(/-/g, '');
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//M Solutions//Booking System//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:${dateStr}
+DTEND;VALUE=DATE:${dateStr}
+DTSTAMP:${timestamp}
+UID:${Date.now()}@msolutions.co.ke
+SUMMARY:${event.title}
+DESCRIPTION:${event.description.replace(/\\n/g, '\\n')}
+LOCATION:${event.location}
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: ${event.title}
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: ${event.title} is today!
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+    // Create and download file
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `msolutions-appointment-${event.date}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+    
+    closeCalendarModal();
+    showToast('Calendar file downloaded!', 'success');
+}

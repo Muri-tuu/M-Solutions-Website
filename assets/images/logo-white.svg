@@ -7,8 +7,8 @@
   <!-- M Letter - Bold, modern -->
   <path d="M14 42V18L28 32L42 18V42" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
   
-  <!-- Shopping indicator dot -->
-  <circle cx="44" cy="14" r="5" fill="white"/>
+  <!-- Star accent -->
+  <path d="M44 8l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4-2.9-2.8 4-.6z" fill="white"/>
   
   <!-- Brand Name - White for dark bg -->
   <text x="62" y="32" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="800" fill="#ffffff">M Solutions</text>
