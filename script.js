@@ -34,6 +34,42 @@ Browser Support:
 document.addEventListener('DOMContentLoaded', () => {
     
     /* =========================================================================
+       0. THEME TOGGLE (Dark/Light Mode)
+       - Toggle between light and dark themes
+       - Persists preference in localStorage
+       - Respects system preference on first visit
+       ========================================================================= */
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Apply initial theme
+    if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+    } else if (systemPrefersDark) {
+        html.setAttribute('data-theme', 'dark');
+    }
+    
+    // Toggle theme on button click
+    themeToggle?.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
+    });
+
+    /* =========================================================================
        1. MOBILE MENU
        - Toggle hamburger menu on mobile devices
        - Auto-close when clicking navigation links
