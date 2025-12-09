@@ -42,15 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     
-    // Check for saved theme preference or system preference
+    // Check for saved theme preference - default to light mode
     const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Apply initial theme
+    // Apply initial theme (light mode is default)
     if (savedTheme) {
         html.setAttribute('data-theme', savedTheme);
-    } else if (systemPrefersDark) {
-        html.setAttribute('data-theme', 'dark');
+    } else {
+        html.setAttribute('data-theme', 'light');
     }
     
     // Toggle theme on button click
@@ -62,13 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', newTheme);
     });
     
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
-    });
-
     /* =========================================================================
        1. MOBILE MENU
        - Toggle hamburger menu on mobile devices
